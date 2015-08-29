@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import request, json
 from flask.json import JSONEncoder
-from . import db
+from models import Base
 
 from .errors import APIException
 
@@ -26,7 +26,7 @@ class CustomJSONEncoder(JSONEncoder):
     """JSON encoder to account for various simplifications"""
     def default(self, obj):
         try:
-            if isinstance(obj, db.Model):
+            if isinstance(obj, Base):
                 temp = obj.to_dict()
                 return temp
 
