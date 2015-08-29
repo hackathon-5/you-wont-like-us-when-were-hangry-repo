@@ -1,5 +1,8 @@
 package com.r0adkll.hackathon.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
@@ -9,7 +12,7 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
  * Created by drew.heavner on 8/28/15.
  */
 @JsonObject
-public class Pet {
+public class Pet implements Parcelable {
 
     public static final String TYPE_DOG = "dog";
     public static final String TYPE_CAT = "cat";
@@ -35,6 +38,46 @@ public class Pet {
 
     @JsonField
     public Shelter shelter;
+
+    public Pet(){}
+
+    protected Pet(Parcel in) {
+        name = in.readString();
+        type = in.readString();
+        photoUrl = in.readString();
+        description = in.readString();
+        age = in.readFloat();
+        avgScore = in.readFloat();
+        shelter = in.readParcelable(Shelter.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(type);
+        dest.writeString(photoUrl);
+        dest.writeString(description);
+        dest.writeFloat(age);
+        dest.writeFloat(avgScore);
+        dest.writeParcelable(shelter, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Pet> CREATOR = new Creator<Pet>() {
+        @Override
+        public Pet createFromParcel(Parcel in) {
+            return new Pet(in);
+        }
+
+        @Override
+        public Pet[] newArray(int size) {
+            return new Pet[size];
+        }
+    };
 
     @Override
     public boolean equals(Object o) {

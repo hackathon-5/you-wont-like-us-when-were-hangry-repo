@@ -7,6 +7,18 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
 
+
+
+    </style>
+
+    <style name="Theme.Hackathon.Transparent" parent="Theme.Hackathon.Base">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Hackathon.Detail" parent="Theme.Hackathon.Transparent">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/black40</item>
     </style>
 
 </resources>

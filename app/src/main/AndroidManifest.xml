@@ -25,7 +25,7 @@
             android:launchMode="singleTask"/>
 
         <activity android:name=".ui.screens.detail.DetailActivity"
-
+            android:theme="@style/Theme.Hackathon.Detail"
             />
 
         <!-- Ollie Content Provider -->

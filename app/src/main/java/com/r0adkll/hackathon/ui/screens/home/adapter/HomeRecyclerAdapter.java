@@ -1,6 +1,8 @@
 package com.r0adkll.hackathon.ui.screens.home.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -70,6 +72,7 @@ public class HomeRecyclerAdapter extends BetterRecyclerAdapter<HomeItem, Recycle
             // Load thumbnail
             Glide.with(mActivity)
                     .load(pet.photoUrl)
+                    .placeholder(new ColorDrawable(Color.GRAY))
                     .crossFade()
                     .into(petHolder.thumbnail);
         }else{

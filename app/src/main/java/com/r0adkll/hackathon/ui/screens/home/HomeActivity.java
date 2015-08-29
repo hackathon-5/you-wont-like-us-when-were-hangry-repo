@@ -1,5 +1,6 @@
 package com.r0adkll.hackathon.ui.screens.home;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import android.view.View;
 import com.ftinc.kit.adapter.BetterRecyclerAdapter;
 import com.ftinc.kit.attributr.ui.widget.StickyRecyclerHeadersElevationDecoration;
 import com.ftinc.kit.util.RxUtils;
+import com.ftinc.kit.util.UIUtils;
 import com.ftinc.kit.widget.EmptyView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,6 +28,7 @@ import com.r0adkll.hackathon.api.ApiService;
 import com.r0adkll.hackathon.api.model.FindPetsResponse;
 import com.r0adkll.hackathon.data.model.Pet;
 import com.r0adkll.hackathon.ui.model.BaseActivity;
+import com.r0adkll.hackathon.ui.screens.detail.DetailActivity;
 import com.r0adkll.hackathon.ui.screens.home.adapter.HomeItem;
 import com.r0adkll.hackathon.ui.screens.home.adapter.HomeRecyclerAdapter;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
@@ -177,6 +180,8 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     public void onItemClick(View view, HomeItem item, int i) {
         Timber.i("Pet clicked: %s", item.item.name);
 
+        Intent intent = DetailActivity.createIntent(this, item.item);
+        UIUtils.startActivityWithTransition(this, intent, view, "pet_image");
 
     }
 }
