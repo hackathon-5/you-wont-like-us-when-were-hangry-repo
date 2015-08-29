@@ -3,6 +3,7 @@ import random
 import os
 import hashlib
 
+from passlib.hash import bcrypt as bc
 from flask import json
 from . import app, db
 from sqlalchemy.ext.mutable import Mutable
