@@ -100,4 +100,4 @@ class User(Base):
 
 class AccessToken(Base):
     token = db.Column(db.String, default=hashlib.sha256(os.urandom(1024)).hexdigest())
-    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
