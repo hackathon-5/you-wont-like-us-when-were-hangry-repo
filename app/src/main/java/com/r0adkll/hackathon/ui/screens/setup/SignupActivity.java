@@ -3,9 +3,7 @@ package com.r0adkll.hackathon.ui.screens.setup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
@@ -14,7 +12,6 @@ import com.ftinc.kit.util.RxUtils;
 import com.r0adkll.hackathon.AppComponent;
 import com.r0adkll.hackathon.R;
 import com.r0adkll.hackathon.api.ApiService;
-import com.r0adkll.hackathon.data.model.User;
 import com.r0adkll.hackathon.ui.AppActivity;
 import com.r0adkll.hackathon.ui.model.BaseActivity;
 import com.r0adkll.hackathon.util.qualifiers.Token;
@@ -25,7 +22,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.android.app.AppObservable;
-import rx.functions.Action1;
 
 /**
  * Project: Hackathon2015
@@ -86,7 +82,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                 .compose(RxUtils.applyIOSchedulers())
                 .subscribe(user -> {
                     hideLoading();
-                    mToken.set(user.token);
+                    mToken.set(user.access_token);
 
                     Intent main = new Intent(SignupActivity.this, AppActivity.class);
                     main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

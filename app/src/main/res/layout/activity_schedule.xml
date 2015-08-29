@@ -29,8 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/layout_schedule_times" />
-
             <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/scrollHorizontal"
                 android:layout_width="match_parent"
@@ -46,94 +44,158 @@
                     >
 
                     <LinearLayout
+                        android:id="@+id/column_container"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingLeft="48dp">
 
-                        <TextView
-                            android:id="@+id/day1"
+                        <LinearLayout
+                            android:id="@+id/day_column_1"
                             android:layout_width="105dp"
-                            android:layout_height="48dp"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            android:text="Sun 8/29"
-                            android:fontFamily="sans-serif-medium"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black54"
-                            />
+                            <TextView
+                                android:id="@+id/day1"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center"
 
-                        <TextView
-                            android:id="@+id/day2"
+                                android:text="Sun 8/29"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black54"
+                                android:layout_marginBottom="7dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/day_column_2"
                             android:layout_width="105dp"
-                            android:layout_height="48dp"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            android:text="Sun 8/29"
-                            android:fontFamily="sans-serif-medium"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black54"
-                            />
+                            <TextView
+                                android:id="@+id/day2"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center"
 
-                        <TextView
-                            android:id="@+id/day3"
+                                android:text="Sun 8/29"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black54"
+                                android:layout_marginBottom="7dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/day_column_3"
                             android:layout_width="105dp"
-                            android:layout_height="48dp"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            android:text="Sun 8/29"
-                            android:fontFamily="sans-serif-medium"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black54"
-                            />
+                            <TextView
+                                android:id="@+id/day3"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center"
 
-                        <TextView
-                            android:id="@+id/day4"
+                                android:text="Sun 8/29"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black54"
+                                android:layout_marginBottom="7dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/day_column_4"
                             android:layout_width="105dp"
-                            android:layout_height="48dp"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            android:text="Sun 8/29"
-                            android:fontFamily="sans-serif-medium"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black54"
-                            />
+                            <TextView
+                                android:id="@+id/day4"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center"
 
-                        <TextView
-                            android:id="@+id/day5"
+                                android:text="Sun 8/29"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black54"
+                                android:layout_marginBottom="7dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/day_column_5"
                             android:layout_width="105dp"
-                            android:layout_height="48dp"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            android:text="Sun 8/29"
-                            android:fontFamily="sans-serif-medium"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black54"
-                            />
+                            <TextView
+                                android:id="@+id/day5"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center"
 
-                        <TextView
-                            android:id="@+id/day6"
+                                android:text="Sun 8/29"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black54"
+                                android:layout_marginBottom="7dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/day_column_6"
                             android:layout_width="105dp"
-                            android:layout_height="48dp"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            android:text="Sun 8/29"
-                            android:fontFamily="sans-serif-medium"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black54"
-                            />
+                            <TextView
+                                android:id="@+id/day6"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center"
 
-                        <TextView
-                            android:id="@+id/day7"
+                                android:text="Sun 8/29"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black54"
+                                android:layout_marginBottom="7dp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/day_column_7"
                             android:layout_width="105dp"
-                            android:layout_height="48dp"
-                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            android:text="Sun 8/29"
-                            android:fontFamily="sans-serif-medium"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black54"
-                            />
+                            <TextView
+                                android:id="@+id/day7"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center"
+
+                                android:text="Sun 8/29"
+                                android:fontFamily="sans-serif-medium"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black54"
+                                android:layout_marginBottom="7dp"
+                                />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -142,6 +204,8 @@
                 </LinearLayout>
 
             </HorizontalScrollView>
+
+            <include layout="@layout/layout_schedule_times" />
 
         </FrameLayout>
 

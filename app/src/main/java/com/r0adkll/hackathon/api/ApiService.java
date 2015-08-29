@@ -2,6 +2,8 @@ package com.r0adkll.hackathon.api;
 
 
 import com.r0adkll.hackathon.api.model.FindPetsResponse;
+import com.r0adkll.hackathon.api.model.ScheduleRequest;
+import com.r0adkll.hackathon.api.model.SuccessResponse;
 import com.r0adkll.hackathon.data.model.User;
 
 import retrofit.http.Body;
@@ -41,4 +43,6 @@ public interface ApiService {
     Observable<FindPetsResponse> findPets(@Field("lat") double latitude,
                                           @Field("lon") double longitude);
 
+    @POST("/schedule")
+    Observable<SuccessResponse> schedule(@Body ScheduleRequest request);
 }

@@ -21,6 +21,6 @@ public class User {
     public String phone;
 
     @JsonField
-    public String token;
+    public String access_token;
 
 }

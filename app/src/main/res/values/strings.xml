@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hackathon2015</string>
+    <string name="app_name">Homeward Pound</string>
 
     <string name="error_network">A network error has occurred please check your connection.</string>
     <string name="error_no_response">There was no response from the server.</string>

@@ -2,16 +2,21 @@ package com.r0adkll.hackathon.api;
 
 import com.ftinc.kit.util.Utils;
 import com.r0adkll.hackathon.api.model.FindPetsResponse;
+import com.r0adkll.hackathon.api.model.ScheduleRequest;
+import com.r0adkll.hackathon.api.model.SuccessResponse;
 import com.r0adkll.hackathon.data.model.Pet;
+import com.r0adkll.hackathon.data.model.Reservations;
 import com.r0adkll.hackathon.data.model.Shelter;
 import com.r0adkll.hackathon.data.model.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import retrofit.http.Body;
 import retrofit.http.Field;
 import rx.Observable;
 
@@ -67,6 +72,36 @@ public class MockApiService implements ApiService{
         }
     };
 
+
+    static int getTimeSlot(int index){
+        return 900 + ((index / 2) * 100) + ((index % 2) * 30);
+    }
+
+    static final SimpleDateFormat RESERVATION_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    static List<Reservations> getMockReservation(){
+        Calendar now = Calendar.getInstance();
+        List<Reservations> rvs = new ArrayList<>();
+
+        for (int i = 0; i < 16; i++) {
+            Reservations rv = new Reservations();
+            rv.date = RESERVATION_FORMAT.format(now.getTime());
+
+            int count = Utils.getRandom().nextInt(8);
+            for (int j = 0; j < count; j++) {
+                int index = Utils.getRandom().nextInt(8);
+                int time = getTimeSlot(index);
+                if(!rv.times.contains(Integer.valueOf(time))){
+                    rv.times.add(time);
+                }
+            }
+
+            rvs.add(rv);
+            now.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        return rvs;
+    }
+
     static String description = "Fatback t-bone biltong beef ribs, brisket sirloin corned beef rump. " +
             "Brisket ham meatball, shank pastrami strip steak ball tip turducken. Sirloin pastrami beef, " +
             "picanha filet mignon short ribs pork loin biltong bacon alcatra tenderloin kevin. Tri-tip " +
@@ -80,7 +115,7 @@ public class MockApiService implements ApiService{
         user.email = "veedubusc@gmail.com";
         user.name = "Drew H.";
         user.phone = "(555) 555-5555";
-        user.token = "12345123";
+        user.access_token = "12345123";
         return Observable.just(user).delay(150, TimeUnit.MILLISECONDS);
     }
 
@@ -90,8 +125,9 @@ public class MockApiService implements ApiService{
         user.email = "veedubusc@gmail.com";
         user.name = "Drew H.";
         user.phone = "(555) 555-5555";
-        user.token = "12345123";
-        return Observable.just(user).delay(150, TimeUnit.MILLISECONDS);
+        user.access_token = "12345123";
+        return Observable.just(user)
+                .delay(150, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -120,13 +156,21 @@ public class MockApiService implements ApiService{
             // Generate Shelter
             index = Utils.getRandom().nextInt(mockShelters.size());
             pet.shelter = mockShelters.get(index);
+            pet.reservations = getMockReservation();
             response.pets.add(pet);
         }
 
         // sort pets
         Collections.sort(response.pets, (lhs, rhs) -> Integer.compare(lhs.shelter.id, rhs.shelter.id));
 
-        return Observable.just(response).delay(150, TimeUnit.MILLISECONDS);
+        return Observable.just(response)
+                .delay(150, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    public Observable<SuccessResponse> schedule(@Body ScheduleRequest request) {
+        return Observable.just(new SuccessResponse())
+                .delay(300, TimeUnit.MILLISECONDS);
     }
 
 

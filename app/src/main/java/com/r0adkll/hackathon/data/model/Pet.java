@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import java.util.List;
+
 /**
  * Project: Hackathon2015
  * Package: com.r0adkll.hackathon.data.model
@@ -39,7 +41,11 @@ public class Pet implements Parcelable {
     @JsonField
     public Shelter shelter;
 
+    @JsonField
+    public List<Reservations> reservations;
+
     public Pet(){}
+
 
     protected Pet(Parcel in) {
         name = in.readString();
@@ -49,6 +55,7 @@ public class Pet implements Parcelable {
         age = in.readFloat();
         avgScore = in.readFloat();
         shelter = in.readParcelable(Shelter.class.getClassLoader());
+        reservations = in.createTypedArrayList(Reservations.CREATOR);
     }
 
     @Override
@@ -60,6 +67,7 @@ public class Pet implements Parcelable {
         dest.writeFloat(age);
         dest.writeFloat(avgScore);
         dest.writeParcelable(shelter, flags);
+        dest.writeTypedList(reservations);
     }
 
     @Override
@@ -93,7 +101,8 @@ public class Pet implements Parcelable {
         if (photoUrl != null ? !photoUrl.equals(pet.photoUrl) : pet.photoUrl != null) return false;
         if (description != null ? !description.equals(pet.description) : pet.description != null)
             return false;
-        return !(shelter != null ? !shelter.equals(pet.shelter) : pet.shelter != null);
+        if (shelter != null ? !shelter.equals(pet.shelter) : pet.shelter != null) return false;
+        return !(reservations != null ? !reservations.equals(pet.reservations) : pet.reservations != null);
 
     }
 
@@ -106,6 +115,7 @@ public class Pet implements Parcelable {
         result = 31 * result + (age != +0.0f ? Float.floatToIntBits(age) : 0);
         result = 31 * result + (avgScore != +0.0f ? Float.floatToIntBits(avgScore) : 0);
         result = 31 * result + (shelter != null ? shelter.hashCode() : 0);
+        result = 31 * result + (reservations != null ? reservations.hashCode() : 0);
         return result;
     }
 }

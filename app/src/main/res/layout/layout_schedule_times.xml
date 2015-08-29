@@ -5,11 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="48dp"
-    android:paddingBottom="@dimen/activity_padding">
+    android:paddingBottom="@dimen/activity_padding"
+    android:elevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
@@ -35,7 +36,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="14dp"
         android:background="@drawable/dotted_line"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="48dp"
@@ -44,7 +45,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="60dp"
@@ -72,7 +73,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="14dp"
         android:background="@drawable/dotted_line"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="48dp"
@@ -81,7 +82,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="60dp"
@@ -109,7 +110,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="14dp"
         android:background="@drawable/dotted_line"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="48dp"
@@ -118,7 +119,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="60dp"
@@ -146,7 +147,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="14dp"
         android:background="@drawable/dotted_line"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="48dp"
@@ -155,7 +156,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="60dp"
@@ -183,7 +184,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="14dp"
         android:background="@drawable/dotted_line"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="48dp"
@@ -192,7 +193,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="60dp"
@@ -220,7 +221,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="14dp"
         android:background="@drawable/dotted_line"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="48dp"
@@ -229,7 +230,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="60dp"
@@ -257,7 +258,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="14dp"
         android:background="@drawable/dotted_line"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="48dp"
@@ -266,7 +267,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="60dp"
@@ -294,7 +295,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="14dp"
         android:background="@drawable/dotted_line"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="48dp"
@@ -303,7 +304,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="60dp"

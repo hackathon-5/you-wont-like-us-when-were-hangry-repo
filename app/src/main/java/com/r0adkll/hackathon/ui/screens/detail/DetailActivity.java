@@ -103,7 +103,7 @@ public class DetailActivity extends BaseActivity implements View.OnClickListener
 
     @OnClick(R.id.action_schedule)
     void onScheduleClicked(){
-        Intent intent = new Intent(this, ScheduleActivity.class);
+        Intent intent = ScheduleActivity.createIntent(this, mPet);
         startActivity(intent);
 
 
