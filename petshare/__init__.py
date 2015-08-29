@@ -4,6 +4,7 @@ import logging
 
 from flask import Flask, g, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
+from werkzeug.exceptions import default_exceptions
 
 from .config import Config
 from .errors import handle_error
