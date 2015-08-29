@@ -23,8 +23,8 @@ def login():
     token = AccessToken(user_id=user.id)
     db.session.add(token)
     db.session.flush()
-    
-    user.access_token = token.token
+
+    user.access_token = [token.token]
 
     db.session.add(token)
     db.session.commit()
@@ -52,7 +52,7 @@ def sign_up():
                     email=request.json.get('email').lower(),
                     phone=request.json.get('phone'),
                     password=request.json.get('password'),
-                    access_token=new_token.token)
+                    access_token=[new_token.token])
 
     db.session.add(new_user)
     db.session.flush()
