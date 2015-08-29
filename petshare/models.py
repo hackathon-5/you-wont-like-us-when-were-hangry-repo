@@ -1,9 +1,12 @@
 import time
 import random
+import os
+import hashlib
 
 from flask import json
 from . import app, db
 from sqlalchemy.ext.mutable import Mutable
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.dialects.postgres import ARRAY
 
 class MutableList(Mutable, list):
@@ -48,7 +51,7 @@ class Pet(Base):
     age = db.Column(db.Float)
     cuddle_score = db.Column(db.Float, default=0)
     photo_url = db.Column(db.String)
-    availability = db.relationship('Availability', backref='pet', lazy='dynamic')
+    reservations = db.relationship('Reservations', backref='pet', lazy='dynamic')
     shelter_id = db.Column(db.Integer, db.ForeignKey('shelter.id'))
 
 
@@ -63,7 +66,34 @@ class Shelter(Base):
     pets = db.relationship('Pet', backref='shelter', lazy='dynamic')
 
 
-class Availability(Base):
+class Reservations(Base):
     date = db.Column(db.String, nullable=False)
     times = db.Column(MutableList.as_mutable(ARRAY(db.Integer)))
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+class User(Base):
+    name = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
+    phone = db.Column(db.Integer, nullable=False)
+    reservations = db.relationship('Reservations', backref='user', lazy='dynamic')
+    access_token = db.relationship('AccessToken', backref='user')
+
+    _password = db.Column("password", db.String, nullable=False)
+
+    @hybrid_property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, value):
+        self._password = bc.encrypt(value)
+
+    def check_password(self, value):
+        return bc.verify(value, self._password)
+
+
+class AccessToken(Base):
+    token = db.Column(db.String, default=hashlib.sha256(os.urandom(1024)).hexdigest())
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))

@@ -6,6 +6,7 @@ from flask import Flask, g, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 
 from .config import Config
+from .errors import handle_error
 
 app = Flask(__name__)
 
@@ -15,13 +16,18 @@ app.config.from_object(Config)
 # Rest of environment
 db = SQLAlchemy(app)
 
+# Error handling
+for code in default_exceptions.keys():
+    app.error_handler_spec[None][code] = handle_api_error
+
 # Auth Checks
 # app.before_request(whatever)
 # app.after_request(whatever)
 
 # Register Blueprints
-# from wherever import whatever_bp
-# app.register_blueprint(whatever_bp)
+from routes import login_bp
+
+app.register_blueprint(login_bp)
 
 # Health check EP
 @app.route('/')
