@@ -9,12 +9,16 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import ollie.annotation.Column;
+import ollie.annotation.Table;
+
 /**
  * Project: Hackathon2015
  * Package: com.r0adkll.hackathon.data.model
  * Created by drew.heavner on 8/29/15.
  */
 @JsonObject
+@Table("reservations")
 public class Reservation implements Parcelable{
 
     @JsonField

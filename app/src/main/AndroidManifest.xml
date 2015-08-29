@@ -6,7 +6,7 @@
 
     <application android:allowBackup="true"
         android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:theme="@style/Theme.Hackathon.Base"
         android:name=".App">
 
@@ -34,11 +34,11 @@
             android:launchMode="singleTask"/>
 
         <!-- Ollie Content Provider -->
-        <!--<provider-->
-            <!--android:authorities="${applicationId}"-->
-            <!--android:name=".data.AppProvider"-->
-            <!--android:exported="false"-->
-            <!--/>-->
+        <provider
+            android:authorities="${applicationId}"
+            android:name=".data.AppProvider"
+            android:exported="false"
+            />
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

@@ -22,7 +22,7 @@ import com.r0adkll.hackathon.data.model.Reservation;
 import com.r0adkll.hackathon.ui.model.BaseFragment;
 import com.r0adkll.hackathon.ui.screens.schedule.adapter.DigestReservation;
 import com.r0adkll.hackathon.ui.screens.schedule.adapter.MyScheduleRecyclerAdapter;
-import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
+import com.r0adkll.hackathon.ui.widget.StickyRecyclerHeadersDecoration;
 
 import java.util.List;
 

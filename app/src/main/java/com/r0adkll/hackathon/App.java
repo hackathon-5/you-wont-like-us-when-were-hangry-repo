@@ -45,8 +45,8 @@ public class App extends Application{
         buildDaggerGraph();
 
         // Setup Ollie
-//        mProvider = new AppProvider();
-//        mProvider.onCreate();
+        mProvider = new AppProvider();
+        mProvider.onCreate();
 
     }
 

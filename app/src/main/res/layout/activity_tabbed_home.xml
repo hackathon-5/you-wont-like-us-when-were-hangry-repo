@@ -37,8 +37,8 @@
             android:layout_height="wrap_content"
 
             app:tabMode="fixed"
-            app:tabIndicatorColor="?attr/colorAccent"
-            app:tabSelectedTextColor="?attr/colorAccent"
+            app:tabIndicatorColor="@color/white"
+            app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/white70"
             android:clipToPadding="false"
             />

@@ -60,14 +60,14 @@ public class MyScheduleRecyclerAdapter extends BetterRecyclerAdapter<DigestReser
 
         holder.title.setText(rv.pet.name);
 
-        String subtitle = String.format("%s - %s at %s", toReadable(rv.startTime), toReadable(rv.endTime), rv.pet.shelter);
+        String subtitle = String.format("%s - %s at %s", toReadable(rv.startTime), toReadable(rv.endTime), rv.pet.shelter.name);
         holder.subtitle.setText(subtitle);
     }
 
     private String toReadable(int time){
         int hour = time / 100;
         int minute = time % 100;
-        return String.format("%1d:%2d", hour, minute);
+        return String.format("%1d:%2$d", hour, minute);
     }
 
     @Override

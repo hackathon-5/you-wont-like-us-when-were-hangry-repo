@@ -96,11 +96,35 @@ public class MockApiService implements ApiService{
                 }
             }
 
+            rv.pet = mockPet();
             rvs.add(rv);
             now.add(Calendar.DAY_OF_YEAR, 1);
         }
 
         return rvs;
+    }
+
+    static Pet mockPet(){
+        Pet pet = new Pet();
+
+        // Generate random pets
+        int index = Utils.getRandom().nextInt(mockPetNames.length);
+        pet.name = mockPetNames[index];
+        pet.age = Utils.getRandom().nextFloat() * 15;
+        pet.avgScore = Utils.getRandom().nextFloat() * 5;
+        pet.type = Utils.getRandom().nextBoolean() ? Pet.TYPE_CAT : Pet.TYPE_DOG;
+        pet.description = description;
+
+        String url = "http://www.placecage.com/%d/%d";
+        int width = Utils.getRandom().nextInt(100) + 400;
+        int height = Utils.getRandom().nextInt(100) + 400;
+        pet.photoUrl = String.format(url, width, height);
+
+        // Generate Shelter
+        index = Utils.getRandom().nextInt(mockShelters.size());
+        pet.shelter = mockShelters.get(index);
+
+        return pet;
     }
 
     static String description = "Fatback t-bone biltong beef ribs, brisket sirloin corned beef rump. " +
@@ -165,7 +189,7 @@ public class MockApiService implements ApiService{
         Collections.sort(response.pets, (lhs, rhs) -> Integer.compare(lhs.shelter.id, rhs.shelter.id));
 
         return Observable.just(response)
-                .delay(150, TimeUnit.MILLISECONDS);
+                .delay(450, TimeUnit.MILLISECONDS);
     }
 
     @Override

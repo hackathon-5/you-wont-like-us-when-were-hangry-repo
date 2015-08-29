@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="52dp"
+    android:gravity="bottom"
+    >
 
     <TextView
         android:id="@+id/title"
@@ -12,6 +14,7 @@
         android:layout_marginLeft="8dp"
 
         tools:text="SUN\n8/29"
+        android:fontFamily="sans-serif-medium"
         android:textSize="12sp"
         android:textColor="@color/black54"
         />

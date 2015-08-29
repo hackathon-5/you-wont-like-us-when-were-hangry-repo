@@ -8,37 +8,49 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.util.List;
 
+import ollie.Model;
+import ollie.annotation.Column;
+import ollie.annotation.Table;
+
 /**
  * Project: Hackathon2015
  * Package: com.r0adkll.hackathon.data.model
  * Created by drew.heavner on 8/28/15.
  */
 @JsonObject
-public class Pet implements Parcelable {
+@Table("pets")
+public class Pet extends Model implements Parcelable {
 
     public static final String TYPE_DOG = "dog";
     public static final String TYPE_CAT = "cat";
 
     @JsonField
+    @Column("name")
     public String name;
 
     // 'dog' or 'cat'
     @JsonField
+    @Column("type")
     public String type;
 
     @JsonField
+    @Column("photo_url")
     public String photoUrl;
 
     @JsonField
+    @Column("description")
     public String description;
 
     @JsonField
-    public float age;
+    @Column("age")
+    public Float age;
 
     @JsonField
-    public float avgScore;
+    @Column("score")
+    public Float avgScore;
 
     @JsonField
+    @Column("shelter")
     public Shelter shelter;
 
     @JsonField
