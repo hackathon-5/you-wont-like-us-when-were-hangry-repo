@@ -1,4 +1,5 @@
 from flask import request, json
+from flask.json import JSONEncoder
 
 from .errors import APIException
 
@@ -18,7 +19,7 @@ def validate_parameters(params):
     else:
         return
 
-        
+
 class CustomJSONEncoder(JSONEncoder):
     """JSON encoder to account for various simplifications"""
     def default(self, obj):
