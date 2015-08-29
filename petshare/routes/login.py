@@ -21,6 +21,9 @@ def login():
         raise APIException('Bad login information', status_code=401)
 
     token = AccessToken(user_id=user.id)
+    db.session.add(token)
+    db.session.flush()
+    
     user.access_token = token.token
 
     db.session.add(token)
@@ -42,6 +45,8 @@ def sign_up():
         raise APIException('User already exists', status_code=409)
 
     new_token = AccessToken()
+    db.session.add(new_token)
+    db.session.flush()
 
     new_user = User(name=request.json.get('name'),
                     email=request.json.get('email').lower(),
