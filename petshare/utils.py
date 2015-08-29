@@ -1,6 +1,6 @@
 from flask import request, json
 
-from .errors import ValidationException
+from .errors import APIException
 
 def validate_parameters(params):
     """Validate that parameters exist in the request JSON or raise an exception."""
