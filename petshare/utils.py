@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import request, json
 from flask.json import JSONEncoder
-from . import app, db
+from petshare import app, db
 
 from .errors import APIException
 
