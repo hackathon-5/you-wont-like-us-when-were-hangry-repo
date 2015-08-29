@@ -3,45 +3,40 @@ package com.r0adkll.hackathon.ui.screens.home;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.ftinc.kit.adapter.BetterRecyclerAdapter;
-import com.ftinc.kit.attributr.ui.widget.StickyRecyclerHeadersElevationDecoration;
 import com.ftinc.kit.util.RxUtils;
 import com.ftinc.kit.util.UIUtils;
 import com.ftinc.kit.widget.EmptyView;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
-import com.r0adkll.hackathon.AppComponent;
+import com.r0adkll.hackathon.App;
 import com.r0adkll.hackathon.R;
 import com.r0adkll.hackathon.api.ApiService;
-import com.r0adkll.hackathon.api.model.FindPetsResponse;
-import com.r0adkll.hackathon.data.model.Pet;
-import com.r0adkll.hackathon.ui.model.BaseActivity;
+import com.r0adkll.hackathon.ui.model.BaseFragment;
 import com.r0adkll.hackathon.ui.screens.detail.DetailActivity;
 import com.r0adkll.hackathon.ui.screens.home.adapter.HomeItem;
 import com.r0adkll.hackathon.ui.screens.home.adapter.HomeRecyclerAdapter;
-import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.functions.Func1;
 import timber.log.Timber;
 
 /**
@@ -49,7 +44,14 @@ import timber.log.Timber;
  * Package: com.r0adkll.hackathon.ui.screens.home
  * Created by drew.heavner on 8/29/15.
  */
-public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, BetterRecyclerAdapter.OnItemClickListener<HomeItem> {
+public class FindPetFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, BetterRecyclerAdapter.OnItemClickListener<HomeItem> {
+
+    public static FindPetFragment createInstance() {
+        return new FindPetFragment();
+    }
+
+    @Bind(R.id.appbar)
+    Toolbar mAppbar;
 
     @Bind(R.id.recycler)
     RecyclerView mRecycler;
@@ -68,19 +70,19 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     private HomeRecyclerAdapter mAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mAppbar.setVisibility(View.GONE);
 
         mRefreshLayout.setColorSchemeResources(R.color.primary, R.color.primary_dark, R.color.accent);
         mRefreshLayout.setOnRefreshListener(this);
 
-        mAdapter = new HomeRecyclerAdapter(this);
+        mAdapter = new HomeRecyclerAdapter(getActivity());
         mAdapter.setEmptyView(mEmptyView);
         mAdapter.setOnItemClickListener(this);
 
         mRecycler.setAdapter(mAdapter);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         layoutManager.setSpanSizeLookup(mAdapter.getSpanLookup());
         mRecycler.setLayoutManager(layoutManager);
         mRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -90,12 +92,38 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     }
 
+    @Nullable
     @Override
-    protected void onResume() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_home, container, false);
+    }
+
+    @Override
+    protected void setupComponent() {
+        super.setupComponent();
+        App.get(getActivity()).component().inject(this);
+    }
+
+    @Override
+    public void onResume() {
         super.onResume();
         if(!mClient.isConnected() || !mClient.isConnecting()){
             mClient.connect();
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        refreshLocation();
+    }
+
+    @Override
+    public void onItemClick(View view, HomeItem item, int i) {
+        Timber.i("Pet clicked: %s", item.item.name);
+
+        Intent intent = DetailActivity.createIntent(getActivity(), item.item);
+        UIUtils.startActivityWithTransition(getActivity(), intent, view, "pet_image");
+
     }
 
     private void setPetData(List<HomeItem> data){
@@ -106,7 +134,7 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     private void loadPetsFromServer(LatLng location){
 
-        AppObservable.bindActivity(this, mApi.findPets(location.latitude, location.longitude))
+        AppObservable.bindSupportFragment(this, mApi.findPets(location.latitude, location.longitude))
                 .compose(RxUtils.applyIOSchedulers())
                 .map(findPetsResponse -> HomeItem.convert(findPetsResponse.pets))
                 .subscribe(homeItems -> {
@@ -138,7 +166,7 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     private void setupGooglePlay(){
 
-        mClient = new GoogleApiClient.Builder(this)
+        mClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
@@ -162,25 +190,6 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                     }
                 })
                 .addOnConnectionFailedListener(connectionResult -> Snackbar.make(mRecycler, "Unable to connect to Google Play Services", Snackbar.LENGTH_SHORT).show()).build();
-
-    }
-
-    @Override
-    protected void setupComponent(AppComponent appGraph) {
-        appGraph.inject(this);
-    }
-
-    @Override
-    public void onRefresh() {
-        refreshLocation();
-    }
-
-    @Override
-    public void onItemClick(View view, HomeItem item, int i) {
-        Timber.i("Pet clicked: %s", item.item.name);
-
-        Intent intent = DetailActivity.createIntent(this, item.item);
-        UIUtils.startActivityWithTransition(this, intent, view, "pet_image");
 
     }
 }

@@ -12,15 +12,11 @@ import java.util.List;
  * Created by drew.heavner on 8/29/15.
  */
 @JsonObject
-public class ScheduleRequest {
+public class ScheduleResponse {
 
     @JsonField
-    List<Reservation> reservations;
+    public List<Reservation> reservations;
 
-    public ScheduleRequest(){}
-
-    public ScheduleRequest(List<Reservation> reservations){
-        this.reservations = reservations;
-    }
+    public ScheduleResponse(){}
 
 }

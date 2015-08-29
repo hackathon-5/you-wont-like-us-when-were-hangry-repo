@@ -3,6 +3,7 @@ package com.r0adkll.hackathon.api;
 
 import com.r0adkll.hackathon.api.model.FindPetsResponse;
 import com.r0adkll.hackathon.api.model.ScheduleRequest;
+import com.r0adkll.hackathon.api.model.ScheduleResponse;
 import com.r0adkll.hackathon.api.model.SuccessResponse;
 import com.r0adkll.hackathon.data.model.User;
 
@@ -45,4 +46,7 @@ public interface ApiService {
 
     @POST("/schedule")
     Observable<SuccessResponse> schedule(@Body ScheduleRequest request);
+
+    @GET("/user/schedule")
+    Observable<ScheduleResponse> getMySchedule();
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+
+        android:background="?attr/colorPrimary"
+        android:elevation="@dimen/appbar_elevation"
+
+        app:title="My Schedule"
+        />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:paddingBottom="4dp"
+            android:clipToPadding="false"
+
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <com.ftinc.kit.widget.EmptyView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
+        android:layout_below="@+id/appbar"
+
+        app:emptyIcon="@mipmap/ic_launcher"
+        app:emptyIconSize="120dp"
+        app:emptyMessage="You currently don't have anything on your schedule"
+
+        />
+
+</RelativeLayout>

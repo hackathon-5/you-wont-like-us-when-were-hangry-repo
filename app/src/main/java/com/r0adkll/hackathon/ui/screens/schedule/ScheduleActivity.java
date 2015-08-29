@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.view.ActionMode;
 import android.text.TextUtils;
-import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +22,7 @@ import com.r0adkll.hackathon.api.ApiService;
 import com.r0adkll.hackathon.api.model.ScheduleRequest;
 import com.r0adkll.hackathon.api.model.SuccessResponse;
 import com.r0adkll.hackathon.data.model.Pet;
-import com.r0adkll.hackathon.data.model.Reservations;
+import com.r0adkll.hackathon.data.model.Reservation;
 import com.r0adkll.hackathon.ui.model.BaseActivity;
 
 import java.text.SimpleDateFormat;
@@ -124,7 +123,7 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
             List<Integer> reservations = new ArrayList<>();
             if(mPet.reservations != null && !mPet.reservations.isEmpty()){
                 for (int j = 0; j < mPet.reservations.size(); j++) {
-                    Reservations rv = mPet.reservations.get(j);
+                    Reservation rv = mPet.reservations.get(j);
                     if(rv.date.equals(key)) {
                         if (rv.times != null && !rv.times.isEmpty()) {
                             for (int k = 0; k < rv.times.size(); k++) {
@@ -173,8 +172,8 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
         return 900 + ((index / 2) * 100) + ((index % 2) * 30);
     }
 
-    private List<Reservations> getSelectedReservations(){
-        List<Reservations> reservations = new ArrayList<>();
+    private List<Reservation> getSelectedReservations(){
+        List<Reservation> reservations = new ArrayList<>();
 
         Map<String, List<Integer>> map = new HashMap<>();
 
@@ -199,7 +198,7 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
         Set<String> keys = map.keySet();
         for (String key : keys) {
             List<Integer> times = map.get(key);
-            Reservations rv = new Reservations();
+            Reservation rv = new Reservation();
             rv.date = key;
             rv.times = new ArrayList<>(times);
             reservations.add(rv);
@@ -240,7 +239,7 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
             // Gather the total amount of time
-            List<Reservations> rvs = getSelectedReservations();
+            List<Reservation> rvs = getSelectedReservations();
 
             if(rvs.isEmpty()){
                 mode.finish();
@@ -270,7 +269,7 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             if(item.getItemId() == R.id.action_submit){
                 // Get all selected Reservations, and send them to server
-                List<Reservations> rvs = getSelectedReservations();
+                List<Reservation> rvs = getSelectedReservations();
 
                 AppObservable.bindActivity(ScheduleActivity.this, mApi.schedule(new ScheduleRequest(rvs)))
                         .compose(RxUtils.applyIOSchedulers())
@@ -281,8 +280,8 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
                                 Timber.d("Pet reservations b4: %s", mPet.reservations);
 
                                 // Delete Reservations from view
-                                for (Reservations rv : rvs) {
-                                    for (Reservations reservation : mPet.reservations) {
+                                for (Reservation rv : rvs) {
+                                    for (Reservation reservation : mPet.reservations) {
                                         if(reservation.date.equals(rv.date)){
                                             reservation.times.addAll(rv.times);
                                         }

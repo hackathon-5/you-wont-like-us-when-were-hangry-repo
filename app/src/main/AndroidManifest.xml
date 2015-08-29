@@ -29,6 +29,9 @@
             />
 
         <activity android:name=".ui.screens.schedule.ScheduleActivity" />
+        <activity android:name=".ui.screens.schedule.MyScheduleActivity" />
+        <activity android:name=".ui.screens.home.TabbedHomeActivity"
+            android:launchMode="singleTask"/>
 
         <!-- Ollie Content Provider -->
         <!--<provider-->

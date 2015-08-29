@@ -3,9 +3,10 @@ package com.r0adkll.hackathon.api;
 import com.ftinc.kit.util.Utils;
 import com.r0adkll.hackathon.api.model.FindPetsResponse;
 import com.r0adkll.hackathon.api.model.ScheduleRequest;
+import com.r0adkll.hackathon.api.model.ScheduleResponse;
 import com.r0adkll.hackathon.api.model.SuccessResponse;
 import com.r0adkll.hackathon.data.model.Pet;
-import com.r0adkll.hackathon.data.model.Reservations;
+import com.r0adkll.hackathon.data.model.Reservation;
 import com.r0adkll.hackathon.data.model.Shelter;
 import com.r0adkll.hackathon.data.model.User;
 
@@ -78,12 +79,12 @@ public class MockApiService implements ApiService{
     }
 
     static final SimpleDateFormat RESERVATION_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    static List<Reservations> getMockReservation(){
+    static List<Reservation> getMockReservation(){
         Calendar now = Calendar.getInstance();
-        List<Reservations> rvs = new ArrayList<>();
+        List<Reservation> rvs = new ArrayList<>();
 
         for (int i = 0; i < 16; i++) {
-            Reservations rv = new Reservations();
+            Reservation rv = new Reservation();
             rv.date = RESERVATION_FORMAT.format(now.getTime());
 
             int count = Utils.getRandom().nextInt(8);
@@ -171,6 +172,14 @@ public class MockApiService implements ApiService{
     public Observable<SuccessResponse> schedule(@Body ScheduleRequest request) {
         return Observable.just(new SuccessResponse())
                 .delay(300, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    public Observable<ScheduleResponse> getMySchedule() {
+        ScheduleResponse response = new ScheduleResponse();
+        response.reservations = getMockReservation();
+        return Observable.just(response)
+                .delay(250, TimeUnit.MILLISECONDS);
     }
 
 

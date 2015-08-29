@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.ftinc.kit.preferences.StringPreference;
 import com.r0adkll.hackathon.App;
 import com.r0adkll.hackathon.ui.screens.home.HomeActivity;
+import com.r0adkll.hackathon.ui.screens.home.TabbedHomeActivity;
 import com.r0adkll.hackathon.ui.screens.setup.LoginActivity;
 import com.r0adkll.hackathon.util.qualifiers.Token;
 
@@ -29,7 +30,7 @@ public class AppActivity extends Activity {
 
         // 3...2...1...FIGHT!!!!
         if(mToken.isSet()){
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, TabbedHomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }else{

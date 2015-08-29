@@ -15,7 +15,7 @@ import java.util.List;
  * Created by drew.heavner on 8/29/15.
  */
 @JsonObject
-public class Reservations implements Parcelable{
+public class Reservation implements Parcelable{
 
     @JsonField
     public String date;
@@ -23,11 +23,15 @@ public class Reservations implements Parcelable{
     @JsonField
     public List<Integer> times;
 
-    public Reservations(){
+    @JsonField
+    public Pet pet;
+
+    public Reservation(){
         times = new ArrayList<>();
     }
 
-    protected Reservations(Parcel in) {
+
+    protected Reservation(Parcel in) {
         date = in.readString();
         int[] timez = in.createIntArray();
         times = new ArrayList<>();
@@ -51,15 +55,15 @@ public class Reservations implements Parcelable{
         return 0;
     }
 
-    public static final Creator<Reservations> CREATOR = new Creator<Reservations>() {
+    public static final Creator<Reservation> CREATOR = new Creator<Reservation>() {
         @Override
-        public Reservations createFromParcel(Parcel in) {
-            return new Reservations(in);
+        public Reservation createFromParcel(Parcel in) {
+            return new Reservation(in);
         }
 
         @Override
-        public Reservations[] newArray(int size) {
-            return new Reservations[size];
+        public Reservation[] newArray(int size) {
+            return new Reservation[size];
         }
     };
 
@@ -76,7 +80,7 @@ public class Reservations implements Parcelable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Reservations that = (Reservations) o;
+        Reservation that = (Reservation) o;
 
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
         return !(times != null ? !times.equals(that.times) : that.times != null);

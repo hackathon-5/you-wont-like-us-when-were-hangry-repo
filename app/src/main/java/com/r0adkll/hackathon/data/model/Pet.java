@@ -42,7 +42,7 @@ public class Pet implements Parcelable {
     public Shelter shelter;
 
     @JsonField
-    public List<Reservations> reservations;
+    public List<Reservation> reservations;
 
     public Pet(){}
 
@@ -55,7 +55,7 @@ public class Pet implements Parcelable {
         age = in.readFloat();
         avgScore = in.readFloat();
         shelter = in.readParcelable(Shelter.class.getClassLoader());
-        reservations = in.createTypedArrayList(Reservations.CREATOR);
+        reservations = in.createTypedArrayList(Reservation.CREATOR);
     }
 
     @Override
