@@ -80,7 +80,7 @@ class Reservations(Base):
 class User(Base):
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
-    phone = db.Column(db.Integer, nullable=False)
+    phone = db.Column(db.String, nullable=False)
     reservations = db.relationship('Reservations', backref='user', lazy='dynamic')
     access_token = db.relationship('AccessToken', backref='user')
 
