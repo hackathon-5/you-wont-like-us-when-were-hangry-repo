@@ -7,7 +7,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug.exceptions import default_exceptions
 
 from .config import Config
-from .errors import handle_error
+from .errors import APIException
 
 app = Flask(__name__)
 
@@ -18,8 +18,11 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 
 # Error handling
-for code in default_exceptions.keys():
-    app.error_handler_spec[None][code] = handle_error
+@app.errorhandler(APIException)
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 
 # Auth Checks
 # app.before_request(whatever)
