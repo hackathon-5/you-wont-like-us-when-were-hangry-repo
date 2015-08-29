@@ -2,6 +2,7 @@ package com.r0adkll.hackathon.ui.screens.schedule.adapter;
 
 import com.r0adkll.hackathon.data.model.Pet;
 import com.r0adkll.hackathon.data.model.Reservation;
+import com.r0adkll.hackathon.data.model.ReservationTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,11 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import rx.Observable;
+import rx.functions.Action2;
+import rx.functions.Func0;
+import rx.functions.Func1;
+
 /**
  * Project: Hackathon2015
  * Package: com.r0adkll.hackathon.ui.screens.schedule.adapter
@@ -18,7 +24,7 @@ import java.util.List;
  */
 public class DigestReservation {
 
-    public static List<DigestReservation> generate(List<Reservation> reservations){
+    public static Observable<List<DigestReservation>> generate(List<Reservation> reservations){
         List<DigestReservation> digest = new ArrayList<>();
 
         // 1) sort data
@@ -34,25 +40,18 @@ public class DigestReservation {
             return 0;
         });
 
-        // For each item collapse/generate digest reservations
-        for (int i = 0; i < reservations.size(); i++) {
-            Reservation rv = reservations.get(i);
-
-            if(rv.times != null && !rv.times.isEmpty()) {
-                for (int j = 1; j < rv.times.size(); j++) {
-                    int timeSlot = rv.times.get(j);
-
+        return Observable.from(reservations)
+                .flatMap(reservation -> reservation.getTimes())
+                .flatMap(reservationTimes -> Observable.from(reservationTimes))
+                .map(rt -> {
                     DigestReservation drv = new DigestReservation();
-                    drv.pet = rv.pet;
-                    drv.date = rv.date;
-                    drv.startTime = timeSlot;
-                    drv.endTime = timeSlot + (timeSlot % 100 == 0 ? 30 : 70);
-                    digest.add(drv);
-                }
-            }
-        }
-
-        return digest;
+                    drv.pet = rt.reservation.pet;
+                    drv.date = rt.reservation.date;
+                    drv.startTime = rt.time;
+                    drv.endTime = rt.time + (rt.time % 100 == 0 ? 30 : 70);
+                    return drv;
+                })
+                .collect(() -> new ArrayList<>(), (digestReservations, digestReservation) -> digestReservations.add(digestReservation));
     }
 
     public String date;

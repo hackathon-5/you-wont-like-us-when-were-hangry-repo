@@ -69,8 +69,9 @@ public class MyScheduleActivity extends BaseActivity implements SwipeRefreshLayo
 
     private void loadScheduleData(List<Reservation> schedule){
         mAdapter.clear();
-        mAdapter.addAll(DigestReservation.generate(schedule));
-        mAdapter.notifyDataSetChanged();
+//        mAdapter.addAll(DigestReservation.generate(schedule));
+        mAdapter.notifyDat
+        aSetChanged();
     }
 
     @Override

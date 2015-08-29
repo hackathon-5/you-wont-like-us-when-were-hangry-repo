@@ -18,6 +18,7 @@ import com.ftinc.kit.widget.EmptyView;
 import com.r0adkll.hackathon.App;
 import com.r0adkll.hackathon.R;
 import com.r0adkll.hackathon.api.ApiService;
+import com.r0adkll.hackathon.api.model.ScheduleResponse;
 import com.r0adkll.hackathon.data.model.Reservation;
 import com.r0adkll.hackathon.ui.model.BaseFragment;
 import com.r0adkll.hackathon.ui.screens.schedule.adapter.DigestReservation;
@@ -30,7 +31,9 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Observable;
 import rx.android.app.AppObservable;
+import rx.functions.Func1;
 
 /**
  * Project: Hackathon2015
@@ -91,9 +94,9 @@ public class MyScheduleFragment extends BaseFragment implements SwipeRefreshLayo
         onRefresh();
     }
 
-    private void loadScheduleData(List<Reservation> schedule){
+    private void loadScheduleData(List<DigestReservation> schedule){
         mAdapter.clear();
-        mAdapter.addAll(DigestReservation.generate(schedule));
+        mAdapter.addAll(schedule);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -103,9 +106,10 @@ public class MyScheduleFragment extends BaseFragment implements SwipeRefreshLayo
         if(!mRefreshLayout.isRefreshing()) mRefreshLayout.setRefreshing(true);
         AppObservable.bindSupportFragment(this, mApi.getMySchedule())
                 .compose(RxUtils.applyIOSchedulers())
-                .subscribe(scheduleResponse -> {
+                .flatMap(scheduleResponse -> DigestReservation.generate(scheduleResponse.reservations))
+                .subscribe(digestReservations -> {
                     mRefreshLayout.setRefreshing(false);
-                    loadScheduleData(scheduleResponse.reservations);
+                    loadScheduleData(digestReservations);
                 }, throwable -> {
                     mRefreshLayout.setRefreshing(false);
                     Snackbar.make(mRecycler, throwable.getLocalizedMessage(), Snackbar.LENGTH_SHORT).show();
