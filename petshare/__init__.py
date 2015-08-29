@@ -8,7 +8,6 @@ from werkzeug.exceptions import default_exceptions
 
 from .config import Config
 from .errors import APIException
-from .routes.utils import CustomJSONEncoder
 
 app = Flask(__name__)
 
@@ -46,6 +45,7 @@ def handle_invalid_usage(error):
 # Auth Checks
 # app.before_request(whatever)
 # app.after_request(whatever)
+from .routes.utils import CustomJSONEncoder
 
 app.json_encoder = CustomJSONEncoder
 
