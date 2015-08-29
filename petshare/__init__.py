@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 
 # Error handling
 for code in default_exceptions.keys():
-    app.error_handler_spec[None][code] = handle_api_error
+    app.error_handler_spec[None][code] = handle_error
 
 # Auth Checks
 # app.before_request(whatever)
