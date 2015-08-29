@@ -3,7 +3,7 @@ import logging
 from flask import Blueprint, jsonify, request, g
 from .. import app, db
 from .utils import validate_parameters
-from ..models import User, AccessToken
+from ..models import User
 from ..errors import APIException
 
 log = logging.getLogger(__name__)
@@ -21,13 +21,8 @@ def login():
     if not user.check_password(request.json.get('password')):
         raise APIException('Bad login information', status_code=401)
 
-    token = AccessToken(user_id=user.id)
-    db.session.add(token)
-    db.session.flush()
+    user.name = user.name
 
-    user.access_token[0] = token
-
-    db.session.add(token)
     db.session.commit()
 
     g.user = user
@@ -51,14 +46,6 @@ def sign_up():
                     password=request.json.get('password'))
 
     db.session.add(new_user)
-    db.session.flush()
-
-    new_token = AccessToken(user_id=new_user.id)
-    db.session.add(new_token)
-    db.session.flush()
-
-    new_user.access_token = [new_token]
-
     db.session.commit()
 
     g.user = new_user
