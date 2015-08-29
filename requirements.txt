@@ -1,0 +1,7 @@
+gunicorn
+psycopg2
+flask
+flask-sqlalchemy
+sqlalchemy
+requests
+newrelic
