@@ -1,8 +1,11 @@
+import logging
+
 from flask import Blueprint, jsonify, request, g
 from .. import app, db
 from ..utils import validate_parameters
 from ..models import User, AccessToken
 
+log = logging.getLogger(__name__)
 login_bp = Blueprint('login', __name__, url_prefix='/login')
 
 @login_bp.route('/sign_up', methods=['POST'])

@@ -11,6 +11,24 @@ from .errors import APIException
 
 app = Flask(__name__)
 
+# Logging
+class RequestContextualFilter(logging.Filter):
+    def filter(self, log_record):
+        with app.app_context():
+            log_record.user_id = getattr(g, 'user', None)
+            return True
+
+log_format = "%(levelname)s\t[%(asctime)s]\t%(user.id)s\t[%(module)s:%(funcName)s:%(lineno)d]: %(message)s"
+formatter = logging.Formatter(log_format)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(formatter)
+
+app.logger.addFilter(RequestContextualFilter())
+app.logger.addHandler(handler)
+app.logger.setLevel(logging.DEBUG)
+app.logger.info('Logging has been configured.')
+
+
 # Set configuration module
 app.config.from_object(Config)
 
