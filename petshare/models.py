@@ -9,7 +9,7 @@ from . import app, db
 from sqlalchemy.ext.mutable import Mutable
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.dialects.postgres import ARRAY
-from sqlalchemy.ext.declarative import declare_attr
+from sqlalchemy.ext.declarative import declared_attr
 
 class MutableList(Mutable, list):
     def append(self, value):
