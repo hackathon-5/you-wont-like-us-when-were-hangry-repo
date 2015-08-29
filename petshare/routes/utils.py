@@ -31,6 +31,15 @@ class CustomJSONEncoder(JSONEncoder):
                 temp = obj.to_dict(exclude=getattr(obj, 'json_hidden'))
                 return temp
 
+            # UNIX timestamps from datetimes
+            if isinstance(obj, datetime):
+                if obj.utcoffset() is not None:
+                    obj = obj - obj.utcoffset()
+
+                seconds = int(calendar.timegm(obj.timetuple()))
+                return seconds
+
+            iterable = iter(obj)
         except TypeError:
             pass
         else:
