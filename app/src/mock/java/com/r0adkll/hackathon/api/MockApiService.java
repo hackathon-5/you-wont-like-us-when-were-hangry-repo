@@ -7,6 +7,8 @@ import com.r0adkll.hackathon.data.model.Shelter;
 import com.r0adkll.hackathon.data.model.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -112,8 +114,8 @@ public class MockApiService implements ApiService{
             pet.description = description;
 
             String url = "http://www.placecage.com/%d/%d";
-            int width = Utils.getRandom().nextInt(100) + 300;
-            int height = Utils.getRandom().nextInt(100) + 300;
+            int width = Utils.getRandom().nextInt(100) + 400;
+            int height = Utils.getRandom().nextInt(100) + 400;
             pet.photoUrl = String.format(url, width, height);
 
             // Generate Shelter
@@ -121,6 +123,9 @@ public class MockApiService implements ApiService{
             pet.shelter = mockShelters.get(index);
             response.pets.add(pet);
         }
+
+        // sort pets
+        Collections.sort(response.pets, (lhs, rhs) -> Integer.compare(lhs.shelter.id, rhs.shelter.id));
 
         return Observable.just(response).delay(150, TimeUnit.MILLISECONDS);
     }

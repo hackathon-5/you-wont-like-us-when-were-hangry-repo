@@ -29,4 +29,7 @@ public class Shelter {
     @JsonField
     public float longitude;
 
+    @JsonField
+    public int distance; // in meters
+
 }
