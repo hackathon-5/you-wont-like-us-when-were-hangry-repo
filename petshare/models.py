@@ -42,7 +42,7 @@ class Base(db.Model):
     updated_at = db.Column(db.BigInteger, default=int(time.time()), onupdate=int(time.time()))
 
     def get_field_names(self, exclude):
-        return [p.key for p in self.__mapper__.iterate_properties if p.key not in exlude and p.key[0] != '_']
+        return [p.key for p in self.__mapper__.iterate_properties if p.key not in exclude and p.key[0] != '_']
 
     def to_dict(self, exclude=None):
         return {f: getattr(self, f) for f in self.get_field_names(exclude)}
