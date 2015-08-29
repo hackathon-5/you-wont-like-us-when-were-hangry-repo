@@ -8,7 +8,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
+import com.ftinc.kit.adapter.BetterRecyclerAdapter;
 import com.ftinc.kit.attributr.ui.widget.StickyRecyclerHeadersElevationDecoration;
 import com.ftinc.kit.util.RxUtils;
 import com.ftinc.kit.widget.EmptyView;
@@ -22,9 +24,13 @@ import com.r0adkll.hackathon.AppComponent;
 import com.r0adkll.hackathon.R;
 import com.r0adkll.hackathon.api.ApiService;
 import com.r0adkll.hackathon.api.model.FindPetsResponse;
+import com.r0adkll.hackathon.data.model.Pet;
 import com.r0adkll.hackathon.ui.model.BaseActivity;
+import com.r0adkll.hackathon.ui.screens.home.adapter.HomeItem;
 import com.r0adkll.hackathon.ui.screens.home.adapter.HomeRecyclerAdapter;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -32,6 +38,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import timber.log.Timber;
 
 /**
@@ -39,7 +46,7 @@ import timber.log.Timber;
  * Package: com.r0adkll.hackathon.ui.screens.home
  * Created by drew.heavner on 8/29/15.
  */
-public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, BetterRecyclerAdapter.OnItemClickListener<HomeItem> {
 
     @Bind(R.id.recycler)
     RecyclerView mRecycler;
@@ -68,11 +75,11 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
         mAdapter = new HomeRecyclerAdapter(this);
         mAdapter.setEmptyView(mEmptyView);
+        mAdapter.setOnItemClickListener(this);
 
         mRecycler.setAdapter(mAdapter);
         mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
         mRecycler.setItemAnimator(new DefaultItemAnimator());
-        mRecycler.addItemDecoration(new StickyRecyclerHeadersElevationDecoration(mAdapter));
 
         // Connect to google play
         setupGooglePlay();
@@ -87,9 +94,9 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         }
     }
 
-    private void setPetData(FindPetsResponse data){
+    private void setPetData(List<HomeItem> data){
         mAdapter.clear();
-        mAdapter.addAll(data.pets);
+        mAdapter.addAll(data);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -97,9 +104,10 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
         AppObservable.bindActivity(this, mApi.findPets(location.latitude, location.longitude))
                 .compose(RxUtils.applyIOSchedulers())
-                .subscribe(findPetsResponse -> {
+                .map(findPetsResponse -> HomeItem.convert(findPetsResponse.pets))
+                .subscribe(homeItems -> {
                     mRefreshLayout.setRefreshing(false);
-                    setPetData(findPetsResponse);
+                    setPetData(homeItems);
                 }, throwable -> {
                     Snackbar.make(mRecycler, throwable.getLocalizedMessage(), Snackbar.LENGTH_SHORT).show();
                     mRefreshLayout.setRefreshing(false);
@@ -161,5 +169,12 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         refreshLocation();
+    }
+
+    @Override
+    public void onItemClick(View view, HomeItem item, int i) {
+        Timber.i("Pet clicked: %s", item.item.name);
+
+
     }
 }

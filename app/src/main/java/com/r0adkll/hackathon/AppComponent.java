@@ -4,6 +4,7 @@ import com.r0adkll.hackathon.api.ApiModule;
 import com.r0adkll.hackathon.data.DataModule;
 import com.r0adkll.hackathon.ui.AppActivity;
 import com.r0adkll.hackathon.ui.UiModule;
+import com.r0adkll.hackathon.ui.screens.detail.DetailActivity;
 import com.r0adkll.hackathon.ui.screens.home.HomeActivity;
 import com.r0adkll.hackathon.ui.screens.setup.LoginActivity;
 import com.r0adkll.hackathon.ui.screens.setup.SignupActivity;
@@ -33,4 +34,6 @@ public interface AppComponent {
     void inject(SignupActivity signupActivity);
 
     void inject(HomeActivity homeActivity);
+
+    void inject(DetailActivity detailActivity);
 }

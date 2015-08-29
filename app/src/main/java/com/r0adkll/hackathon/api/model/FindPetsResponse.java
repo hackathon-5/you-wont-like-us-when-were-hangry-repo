@@ -18,7 +18,4 @@ public class FindPetsResponse {
     @JsonField
     public List<Pet> pets;
 
-    @JsonField
-    public List<Shelter> shelters;
-
 }
