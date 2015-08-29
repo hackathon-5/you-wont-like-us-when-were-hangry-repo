@@ -71,12 +71,12 @@ public class OllieApiService implements ApiService {
 
         // 1) Creat shelters
         Shelter s1 = new Shelter();
-        s1.name = "";
-        s1.description = "";
-        s1.address = "";
-        s1.distance = 0;
-        s1.latitude = 0.0f;
-        s1.longitude = 0.0f;
+        s1.name = "Greyhoud Pets of America - Charleston";
+        s1.description = "Greyhound Pets of America - Charleston is an all-volunteer, nonprofit organization dedicated to finding caring, permanent homes for retired racing greyhounds, and to providing support and guidance for the adopted dogs and their families.";
+        s1.address = "PO Box 14533 Charleston, SC 29422";
+        s1.distance = 10278;
+        s1.latitude = 32.897561f;
+        s1.longitude = -80.026065f;
         s1.save();
 
         /**********************************************************
@@ -149,12 +149,12 @@ public class OllieApiService implements ApiService {
          */
 
         Shelter s2 = new Shelter();
-        s2.name = "";
-        s2.description = "";
-        s2.address = "";
-        s2.distance = 0;
-        s2.latitude = 0.0f;
-        s2.longitude = 0.0f;
+        s2.name = "Daisy's Place Retriever Rescue";
+        s2.description = "Daisy's Place Retriever Rescue is dedicated to saving and finding loving homes for Retrievers (and Retriever mixes) six years and older.";
+        s2.address = "PO Box 20729 Charleston, SC 29413";
+        s2.distance = 21291;
+        s2.latitude = 32.712772f;
+        s2.longitude = -79.965249f;
         s2.save();
 
         Pet p21 = new Pet();
@@ -178,13 +178,84 @@ public class OllieApiService implements ApiService {
         p21.save();
 
         Shelter s3 = new Shelter();
-        s3.name = "";
-        s3.description = "";
-        s3.address = "";
-        s3.distance = 0;
-        s3.latitude = 0.0f;
-        s3.longitude = 0.0f;
+        s3.name = "Advanced Animal Care";
+        s3.description = "Since 2001, Advanced Animal Care has been serving the Mount Pleasant and surrounding areas. We are a full-service veterinary practice offering general veterinary medicine and surgery.";
+        s3.address = "3373 S. Morgan's Point Rd. Mt. Pleasant, SC 29466";
+        s3.distance = 15734;
+        s3.latitude = 32.996595f;
+        s3.longitude = -80.039764f;
         s3.save();
+
+        Pet p28 = new Pet();
+        p28.name = "Cricket";
+        p28.description = "Cricket is a 3 yr. old female cat that was adopted from us about 2 years ago. Unfortunately, her family could no longer care for her and had to make the heartbreaking decision to return her back to us. She is still incredibly sweet and affectionate, despite having to be relocated back.";
+        p28.type = "cat";
+        p28.age = 2.0f;
+        p28.avgScore = 4.3f;
+        p28.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/32919246/2/?bust=1438702789&width=632&no_scale_up=1";
+        p28.shelter = s3;
+        p28.save();
+
+        Pet p29 = new Pet();
+        p29.name = "Fiona";
+        p29.description = "Fiona is the SWEETEST, SMALLEST, CUTEST, thing you've ever seen! She is about 6 weeks old and was bottle raised by one of our technicians here. She is healthy, happy, and well-adjusted, and just wants someone to cuddle up with at night.";
+        p29.type = "cat";
+        p29.age = 0.1f;
+        p29.avgScore = 5.0f;
+        p29.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/32950890/1/?bust=1438968703&width=632&no_scale_up=1";
+        p29.shelter = s3;
+        p29.save();
+
+        Pet p30 = new Pet();
+        p30.name = "Lolly";
+        p30.description = "Lolly is 2 years old and weighs about 7 pounds. She is waiting patiently for a loving home. She tested negative for feline leukemia, has been dewormed, received the FVRCP and Rabies Vaccines, and has been spayed.";
+        p30.type = "cat";
+        p30.age = 2.0f;
+        p30.avgScore = 3.2f;
+        p30.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/33011543/1/?bust=1439569551&width=632&no_scale_up=1";
+        p30.shelter = s3;
+        p30.save();
+
+        Pet p31 = new Pet();
+        p31.name = "Moby";
+        p31.description = "About 3 years old. Good with cats and dogs. 'Talks' to you for attention and is very sweet. Come spend some time with him if you have a chance!";
+        p31.type = "cat";
+        p31.age = 3.0f;
+        p31.avgScore = 4.0f;
+        p31.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/32506347/1/?bust=1434913182&width=632&no_scale_up=1";
+        p31.shelter = s3;
+        p31.save();
+
+        Pet p32 = new Pet();
+        p32.name = "Milo";
+        p32.description = "My name is Milo. I was named after a hobbit from Lord of the Rings. I am a brown tabby cat but not an ordinary tabby. I have the biggest eyes, the most handsome face and a white bib and feet. I am easy going and grateful for any attention. I purr, reach for your touch and love to sit in your lap. I am a very good boy who deserves a loving stable forever home.";
+        p32.type = "cat";
+        p32.age = 4.5f;
+        p32.avgScore = 2.8f;
+        p32.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/27024593/2/?bust=1384104128&width=632&no_scale_up=1";
+        p32.shelter = s3;
+        p32.save();
+
+        Pet p33 = new Pet();
+        p33.name = "Sweden & Norway";
+        p33.description = "Sweden and Norway are so close they wanted to have their picture taken together. They are almost 3 months old.";
+        p33.type = "cat";
+        p33.age = 0.3f;
+        p33.avgScore = 2.5f;
+        p33.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/33061353/1/?bust=1440081467&width=632&no_scale_up=1";
+        p33.shelter = s3;
+        p33.save();
+
+        Pet p34 = new Pet();
+        p34.name = "Chive";
+        p34.description = "Chive is a very alert, funny, and playful 10 month old kitty. She is fun to watch and will take a break to give you some affection while she catches her breath";
+        p34.type = "cat";
+        p34.age = 0.8f;
+        p34.avgScore = 1.5f;
+        p34.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/16088332/2/?bust=1300631273&width=632&no_scale_up=1";
+        p34.shelter = s3;
+        p34.save();
+
 
     }
 
