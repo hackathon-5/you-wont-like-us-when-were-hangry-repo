@@ -32,7 +32,7 @@ def login():
 
     g.user = user
 
-    rv = jsonify(user=user.to_dict(exclude=user.json_hidden or [])
+    rv = jsonify(user=user.to_dict(exclude=user.json_hidden or []))
     rv.status_code = 200
     return rv
 
