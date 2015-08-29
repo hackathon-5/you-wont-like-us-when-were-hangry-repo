@@ -33,7 +33,7 @@ class MutableList(Mutable, list):
 class Base(db.Model):
     @declared_attr
     def __tablename__(cls):
-        return cls.__name__lower()
+        return cls.__name__.lower()
 
     id = db.Column(db.Integer, primary_key=True, default=hash(time.time() + random.randrange(1000, 9999)))
     created_at = db.Column(db.Integer, default=int(time.time()))
