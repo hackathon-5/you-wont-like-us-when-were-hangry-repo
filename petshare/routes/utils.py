@@ -26,7 +26,7 @@ class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
         try:
             if isinstance(obj, db.Model):
-                temp = obj.to_dict(exclude=getattr(obj, 'json_hidden', None))
+                temp = obj.to_dict(exclude=getattr(obj, 'json_hidden'))
                 return temp
 
         except TypeError:

@@ -81,6 +81,8 @@ class Reservations(Base):
 
 
 class User(Base):
+    json_hidden = None
+    
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
     phone = db.Column(db.String, nullable=False)
