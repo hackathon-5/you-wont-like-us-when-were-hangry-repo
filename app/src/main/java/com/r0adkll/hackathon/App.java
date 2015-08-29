@@ -4,6 +4,7 @@ import android.app.Application;
 import android.app.Service;
 import android.content.Context;
 
+import com.r0adkll.hackathon.api.ApiModule;
 import com.r0adkll.hackathon.data.AppProvider;
 import com.r0adkll.hackathon.data.DataModule;
 import com.r0adkll.hackathon.ui.UiModule;
@@ -44,8 +45,8 @@ public class App extends Application{
         buildDaggerGraph();
 
         // Setup Ollie
-        mProvider = new AppProvider();
-        mProvider.onCreate();
+//        mProvider = new AppProvider();
+//        mProvider.onCreate();
 
     }
 
@@ -64,6 +65,7 @@ public class App extends Application{
                 .appModule(new AppModule(this))
                 .dataModule(new DataModule())
                 .uiModule(new UiModule())
+                .apiModule(new ApiModule())
                 .build();
         mComponent.inject(this);
     }

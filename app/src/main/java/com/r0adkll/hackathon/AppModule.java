@@ -2,6 +2,8 @@ package com.r0adkll.hackathon;
 
 import android.content.Context;
 
+import com.r0adkll.hackathon.util.qualifiers.ApiUrl;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -26,6 +28,9 @@ public class AppModule {
         return mApp;
     }
 
-
+    @Provides @Singleton @ApiUrl
+    String provideApiUrl(){
+        return "http://0.0.0.0/v1";
+    }
 
 }
