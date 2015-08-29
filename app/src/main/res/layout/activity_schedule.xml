@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+
+        android:background="?attr/colorPrimary"
+        android:elevation="@dimen/appbar_elevation"
+
+        app:navigationIcon="@drawable/ic_clear_24dp"
+        app:title="Schedule"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/layout_schedule_times" />
+
+            <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/scrollHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/appbar"
+                android:scrollbars="none"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="48dp">
+
+                        <TextView
+                            android:id="@+id/day1"
+                            android:layout_width="105dp"
+                            android:layout_height="48dp"
+                            android:gravity="center"
+
+                            android:text="Sun 8/29"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black54"
+                            />
+
+                        <TextView
+                            android:id="@+id/day2"
+                            android:layout_width="105dp"
+                            android:layout_height="48dp"
+                            android:gravity="center"
+
+                            android:text="Sun 8/29"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black54"
+                            />
+
+                        <TextView
+                            android:id="@+id/day3"
+                            android:layout_width="105dp"
+                            android:layout_height="48dp"
+                            android:gravity="center"
+
+                            android:text="Sun 8/29"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black54"
+                            />
+
+                        <TextView
+                            android:id="@+id/day4"
+                            android:layout_width="105dp"
+                            android:layout_height="48dp"
+                            android:gravity="center"
+
+                            android:text="Sun 8/29"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black54"
+                            />
+
+                        <TextView
+                            android:id="@+id/day5"
+                            android:layout_width="105dp"
+                            android:layout_height="48dp"
+                            android:gravity="center"
+
+                            android:text="Sun 8/29"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black54"
+                            />
+
+                        <TextView
+                            android:id="@+id/day6"
+                            android:layout_width="105dp"
+                            android:layout_height="48dp"
+                            android:gravity="center"
+
+                            android:text="Sun 8/29"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black54"
+                            />
+
+                        <TextView
+                            android:id="@+id/day7"
+                            android:layout_width="105dp"
+                            android:layout_height="48dp"
+                            android:gravity="center"
+
+                            android:text="Sun 8/29"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black54"
+                            />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </FrameLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

@@ -19,6 +19,7 @@ import com.r0adkll.hackathon.AppComponent;
 import com.r0adkll.hackathon.R;
 import com.r0adkll.hackathon.data.model.Pet;
 import com.r0adkll.hackathon.ui.model.BaseActivity;
+import com.r0adkll.hackathon.ui.screens.schedule.ScheduleActivity;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrPosition;
@@ -102,7 +103,8 @@ public class DetailActivity extends BaseActivity implements View.OnClickListener
 
     @OnClick(R.id.action_schedule)
     void onScheduleClicked(){
-
+        Intent intent = new Intent(this, ScheduleActivity.class);
+        startActivity(intent);
 
 
     }

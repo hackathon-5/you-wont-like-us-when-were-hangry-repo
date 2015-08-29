@@ -28,6 +28,8 @@
             android:theme="@style/Theme.Hackathon.Detail"
             />
 
+        <activity android:name=".ui.screens.schedule.ScheduleActivity" />
+
         <!-- Ollie Content Provider -->
         <!--<provider-->
             <!--android:authorities="${applicationId}"-->
