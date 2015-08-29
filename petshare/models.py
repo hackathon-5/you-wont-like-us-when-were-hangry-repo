@@ -38,8 +38,8 @@ class Base(db.Model):
         return cls.__name__.lower()
 
     id = db.Column(db.BigInteger, primary_key=True, default=hash(time.time() + random.randrange(0, 99)))
-    created_at = db.Column(db.Integer, default=int(time.time()))
-    updated_at = db.Column(db.Integer, default=int(time.time()), onupdate=int(time.time()))
+    created_at = db.Column(db.BigInteger, default=int(time.time()))
+    updated_at = db.Column(db.BigInteger, default=int(time.time()), onupdate=int(time.time()))
 
     def get_field_names(self):
         return [p.key for p in self.__mapper__.iterate_properties if p.key[0] != '_']
