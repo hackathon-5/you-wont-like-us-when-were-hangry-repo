@@ -7,3 +7,4 @@ requests
 newrelic
 passlib
 py-bcrypt
+geopy
