@@ -56,7 +56,7 @@ class Pet(Base):
     cuddle_score = db.Column(db.Float, default=0)
     photo_url = db.Column(db.String)
     reservations = db.relationship('Reservations', backref='pet', lazy='dynamic')
-    shelter_id = db.Column(db.Integer, db.ForeignKey('shelter.id'))
+    shelter_id = db.Column(db.BigInteger, db.ForeignKey('shelter.id'))
 
 
 class Shelter(Base):
@@ -73,8 +73,8 @@ class Shelter(Base):
 class Reservations(Base):
     date = db.Column(db.String, nullable=False)
     times = db.Column(MutableList.as_mutable(ARRAY(db.Integer)))
-    pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pet_id = db.Column(db.BigInteger, db.ForeignKey('pet.id'))
+    user_id = db.Column(db.BigInteger, db.ForeignKey('user.id'))
 
 
 class User(Base):
@@ -100,4 +100,4 @@ class User(Base):
 
 class AccessToken(Base):
     token = db.Column(db.String, default=hashlib.sha256(os.urandom(1024)).hexdigest())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.BigInteger, db.ForeignKey('user.id'))
