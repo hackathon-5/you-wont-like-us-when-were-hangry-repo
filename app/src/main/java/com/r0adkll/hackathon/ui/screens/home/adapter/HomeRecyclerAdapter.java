@@ -1,6 +1,7 @@
 package com.r0adkll.hackathon.ui.screens.home.adapter;
 
 import android.app.Activity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,15 @@ public class HomeRecyclerAdapter extends BetterRecyclerAdapter<HomeItem, Recycle
         mActivity = activity;
     }
 
+    public GridLayoutManager.SpanSizeLookup getSpanLookup(){
+        return new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                HomeItem item = getItem(position);
+                return item.type == TYPE_HEADER ? 3 : 1;
+            }
+        };
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

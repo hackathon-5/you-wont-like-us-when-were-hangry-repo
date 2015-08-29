@@ -78,7 +78,9 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         mAdapter.setOnItemClickListener(this);
 
         mRecycler.setAdapter(mAdapter);
-        mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        layoutManager.setSpanSizeLookup(mAdapter.getSpanLookup());
+        mRecycler.setLayoutManager(layoutManager);
         mRecycler.setItemAnimator(new DefaultItemAnimator());
 
         // Connect to google play

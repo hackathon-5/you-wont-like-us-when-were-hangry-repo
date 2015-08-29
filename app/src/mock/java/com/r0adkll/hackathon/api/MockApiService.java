@@ -99,7 +99,6 @@ public class MockApiService implements ApiService{
         FindPetsResponse response = new FindPetsResponse();
 
         response.pets = new ArrayList<>();
-        response.shelters = new ArrayList<>(mockShelters);
 
         // Generate test data
         for (int i = 0; i < 20; i++) {
