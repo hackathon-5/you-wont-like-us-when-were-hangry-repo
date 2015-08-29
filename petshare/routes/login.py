@@ -43,7 +43,7 @@ def login():
     if not user:
         raise APIException('User not found', status_code=404)
 
-    if not user.check_password(request.json.get('password'))
+    if not user.check_password(request.json.get('password')):
         raise APIException('Bad login information', status_code=401)
 
     token = AccessToken(user_id=user.id)
