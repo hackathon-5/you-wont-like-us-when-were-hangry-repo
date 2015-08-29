@@ -90,7 +90,7 @@ class User(Base):
     email = db.Column(db.String, nullable=False, unique=True)
     phone = db.Column(db.String, nullable=False)
     reservations = db.relationship('Reservations', backref='user', lazy='dynamic')
-    access_token = db.Column(db.String, default=hashlib.sha256(os.urandom(1024)).hexdigest(), onupdate==hashlib.sha256(os.urandom(1024)).hexdigest())
+    access_token = db.Column(db.String, default=hashlib.sha256(os.urandom(1024)).hexdigest(), onupdate=hashlib.sha256(os.urandom(1024)).hexdigest())
 
     _password = db.Column("password", db.String, nullable=False)
 
