@@ -24,15 +24,7 @@ def validate_parameters(params):
 class CustomJSONEncoder(JSONEncoder):
     """JSON encoder to account for various simplifications"""
     def default(self, obj):
-        try:
-            if isinstance(obj, db.Model):
-                temp = obj.to_dict(exclude=getattr(obj, 'json_hidden'))
-                return temp
-
-        except TypeError:
-            pass
-        else:
-            return list(iterable)
+        
 
         try:
             rv = JSONEncoder.default(self, obj)
