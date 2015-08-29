@@ -21,7 +21,7 @@ def login():
     if not user.check_password(request.json.get('password')):
         raise APIException('Bad login information', status_code=401)
 
-    token = AccessToken(_user_id=user.id)
+    token = AccessToken(user_id=user.id)
     db.session.add(token)
     db.session.flush()
 
@@ -32,7 +32,7 @@ def login():
 
     g.user = user
 
-    rv = jsonify(user=user.to_dict())
+    rv = jsonify(user=user)
     rv.status_code = 200
     return rv
 
@@ -53,7 +53,7 @@ def sign_up():
     db.session.add(new_user)
     db.session.flush()
 
-    new_token = AccessToken(_user_id=new_user.id)
+    new_token = AccessToken(user_id=new_user.id)
     db.session.add(new_token)
     db.session.flush()
 
@@ -63,6 +63,6 @@ def sign_up():
 
     g.user = new_user
 
-    rv = jsonify(user=new_user.to_dict())
+    rv = jsonify(user=new_user)
     rv.status_code = 200
     return rv

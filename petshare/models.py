@@ -41,11 +41,11 @@ class Base(db.Model):
     created_at = db.Column(db.BigInteger, default=int(time.time()))
     updated_at = db.Column(db.BigInteger, default=int(time.time()), onupdate=int(time.time()))
 
-    def get_field_names(self):
-        return [p.key for p in self.__mapper__.iterate_properties if p.key[0] != '_']
+    def get_field_names(self, exclude):
+        return [p.key for p in self.__mapper__.iterate_properties if p.key not in exlude and p.key[0] != '_']
 
     def to_dict(self, exclude=None):
-        return {f: getattr(self, f) for f in self.get_field_names()}
+        return {f: getattr(self, f) for f in self.get_field_names(exclude)}
 
 
 class Pet(Base):
@@ -99,5 +99,6 @@ class User(Base):
 
 
 class AccessToken(Base):
+    json_hidden = ['user_id']
     token = db.Column(db.String, default=hashlib.sha256(os.urandom(1024)).hexdigest())
-    _user_id = db.Column(db.BigInteger, db.ForeignKey('user.id'))
+    user_id = db.Column(db.BigInteger, db.ForeignKey('user.id'))

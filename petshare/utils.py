@@ -3,6 +3,7 @@ from flask import request, json
 from flask.json import JSONEncoder
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from .errors import APIException
+from .models import Base
 
 def validate_parameters(params):
     """Validate that parameters exist in the request JSON or raise an exception."""
@@ -25,6 +26,9 @@ class CustomJSONEncoder(JSONEncoder):
     """JSON encoder to account for various simplifications"""
     def default(self, obj):
         try:
+            if isinstance(obj, Base):
+                temp = obj.to_dict(exclude=getattr(obj, 'json_hidden', None))
+                return temp
 
             # UNIX timestamps from datetimes
             if isinstance(obj, datetime):
