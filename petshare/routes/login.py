@@ -2,7 +2,7 @@ import logging
 
 from flask import Blueprint, jsonify, request, g
 from .. import app, db
-from ..helpers.utils import validate_parameters
+from .utils import validate_parameters
 from ..models import User, AccessToken
 from ..errors import APIException
 

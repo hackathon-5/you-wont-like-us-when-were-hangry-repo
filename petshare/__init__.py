@@ -8,7 +8,7 @@ from werkzeug.exceptions import default_exceptions
 
 from .config import Config
 from .errors import APIException
-from .helpers.utils import CustomJSONEncoder
+from .routes.utils import CustomJSONEncoder
 
 app = Flask(__name__)
 
