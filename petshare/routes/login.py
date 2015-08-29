@@ -25,7 +25,7 @@ def login():
     db.session.add(token)
     db.session.flush()
 
-    user.access_token = [token]
+    user.access_token[0] = token
 
     db.session.add(token)
     db.session.commit()
