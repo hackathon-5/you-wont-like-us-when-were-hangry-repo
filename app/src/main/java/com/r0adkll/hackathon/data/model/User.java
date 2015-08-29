@@ -3,9 +3,13 @@ package com.r0adkll.hackathon.data.model;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import java.util.List;
+
 import ollie.Model;
 import ollie.annotation.Column;
 import ollie.annotation.Table;
+import ollie.query.Select;
+import rx.Observable;
 
 /**
  * Project: Hackathon2015
@@ -31,5 +35,12 @@ public class User extends Model{
     @JsonField
     @Column("access_token")
     public String access_token;
+
+    public Observable<List<Reservation>> getReservations(){
+        return Select.from(Reservation.class)
+                .where("user=?", id)
+                .observable();
+    }
+
 
 }

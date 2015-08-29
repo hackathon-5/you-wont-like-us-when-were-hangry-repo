@@ -36,10 +36,13 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import ollie.Model;
 import pocketknife.BindExtra;
 import pocketknife.SaveState;
+import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import timber.log.Timber;
 
 /**
@@ -51,7 +54,7 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
 
     public static Intent createIntent(Context ctx, Pet pet){
         Intent intent = new Intent(ctx, ScheduleActivity.class);
-        intent.putExtra(EXTRA_PET, pet);
+        intent.putExtra(EXTRA_PET, pet.id);
         return intent;
     }
 
@@ -73,6 +76,8 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
 
     @SaveState
     @BindExtra(EXTRA_PET)
+    long mPetId;
+
     Pet mPet;
 
     private ActionMode mActionMode;
@@ -83,6 +88,7 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
+        mPet = Model.find(Pet.class, mPetId);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getAppBar().setNavigationOnClickListener(this);
@@ -92,7 +98,11 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
         getAppBar().setNavigationIcon(close);
 
         setupWeekHeaders();
-        setupAvailableSchedule();
+        AppObservable.bindActivity(this, mPet.getReservations())
+                .compose(RxUtils.applyIOSchedulers())
+                .subscribe(reservations -> {
+                    setupAvailableSchedule(reservations);
+                });
     }
 
 
@@ -106,7 +116,7 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    private void setupAvailableSchedule(){
+    private void setupAvailableSchedule(List<Reservation> petReserves){
         mCells.clear();
         Calendar now = Calendar.getInstance();
 
@@ -121,9 +131,9 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
 
             // Now find the array of scheduled reservations for the day
             List<Integer> reservations = new ArrayList<>();
-            if(mPet.reservations != null && !mPet.reservations.isEmpty()){
-                for (int j = 0; j < mPet.reservations.size(); j++) {
-                    Reservation rv = mPet.reservations.get(j);
+            if(petReserves != null && !petReserves.isEmpty()){
+                for (int j = 0; j < petReserves.size(); j++) {
+                    Reservation rv = petReserves.get(j);
                     if(rv.date.equals(key)) {
                         if (rv.times != null && !rv.times.isEmpty()) {
                             for (int k = 0; k < rv.times.size(); k++) {
@@ -199,6 +209,7 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
         for (String key : keys) {
             List<Integer> times = map.get(key);
             Reservation rv = new Reservation();
+            rv.pet = mPet;
             rv.date = key;
             rv.times = new ArrayList<>(times);
             reservations.add(rv);
@@ -273,27 +284,17 @@ public class ScheduleActivity extends BaseActivity implements View.OnClickListen
 
                 AppObservable.bindActivity(ScheduleActivity.this, mApi.schedule(new ScheduleRequest(rvs)))
                         .compose(RxUtils.applyIOSchedulers())
-                        .subscribe(new Action1<SuccessResponse>() {
+                        .flatMap(new Func1<SuccessResponse, Observable<List<Reservation>>>() {
                             @Override
-                            public void call(SuccessResponse successResponse) {
-
-                                Timber.d("Pet reservations b4: %s", mPet.reservations);
-
-                                // Delete Reservations from view
-                                for (Reservation rv : rvs) {
-                                    for (Reservation reservation : mPet.reservations) {
-                                        if(reservation.date.equals(rv.date)){
-                                            reservation.times.addAll(rv.times);
-                                        }
-                                    }
-                                }
-
-                                Timber.d("Pet reservations after: %s", mPet.reservations);
-
-                                setupAvailableSchedule();
-                                mode.setTag("scheduled");
-                                mode.finish();
+                            public Observable<List<Reservation>> call(SuccessResponse successResponse) {
+                                return mPet.getReservations();
                             }
+                        })
+                        .subscribe(reservations -> {
+                            setupAvailableSchedule(reservations);
+
+                            mode.setTag("scheduled");
+                            mode.finish();
                         }, new Action1<Throwable>() {
                             @Override
                             public void call(Throwable throwable) {

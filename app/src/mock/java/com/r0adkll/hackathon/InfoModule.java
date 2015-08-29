@@ -1,7 +1,7 @@
 package com.r0adkll.hackathon;
 
 import com.r0adkll.hackathon.api.ApiService;
-import com.r0adkll.hackathon.api.MockApiService;
+import com.r0adkll.hackathon.api.OllieApiService;
 
 import javax.inject.Singleton;
 
@@ -19,7 +19,7 @@ public class InfoModule {
 
     @Provides @Singleton
     ApiService provideApiService(RestAdapter adapter){
-        return new MockApiService();
+        return new OllieApiService();
     }
 
 }

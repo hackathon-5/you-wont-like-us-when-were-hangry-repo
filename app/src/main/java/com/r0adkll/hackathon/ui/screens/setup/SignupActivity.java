@@ -83,6 +83,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                 .subscribe(user -> {
                     hideLoading();
                     mToken.set(user.access_token);
+                    user.save();
 
                     Intent main = new Intent(SignupActivity.this, AppActivity.class);
                     main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

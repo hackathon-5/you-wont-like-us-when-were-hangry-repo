@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="detail_backdrop_height">264dp</dimen>
+    <dimen name="detail_backdrop_height">320dp</dimen>
     <dimen name="schedule_cell_height">74dp</dimen>
     <dimen name="schedule_cell_width">105dp</dimen>
     <dimen name="schedule_cell_margin">0dp</dimen>

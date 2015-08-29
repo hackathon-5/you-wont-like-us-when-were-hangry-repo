@@ -15,7 +15,7 @@ import java.util.List;
 public class ScheduleRequest {
 
     @JsonField
-    List<Reservation> reservations;
+    public List<Reservation> reservations;
 
     public ScheduleRequest(){}
 

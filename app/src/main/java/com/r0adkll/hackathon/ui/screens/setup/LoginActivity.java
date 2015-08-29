@@ -83,6 +83,7 @@ public class LoginActivity extends BaseActivity {
                 .subscribe(user -> {
                     hideLoading();
                     mTokenPref.set(user.access_token);
+                    user.save();
 
                     Intent main = new Intent(LoginActivity.this, AppActivity.class);
                     main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

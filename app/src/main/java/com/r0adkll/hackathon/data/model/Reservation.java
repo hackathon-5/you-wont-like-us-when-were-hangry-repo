@@ -37,6 +37,15 @@ public class Reservation extends Model{
     )
     public Pet pet;
 
+    @Column("user")
+    @ForeignKey(
+            onUpdate = ForeignKey.ReferentialAction.CASCADE,
+            onDelete = ForeignKey.ReferentialAction.CASCADE
+    )
+    public User user;
+
+    public List<Integer> times = new ArrayList<>();
+
     public Observable<List<ReservationTime>> getTimes(){
         return Select.from(ReservationTime.class)
                 .where("reservation=?", id)

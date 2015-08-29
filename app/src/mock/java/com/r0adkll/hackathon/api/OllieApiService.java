@@ -5,14 +5,20 @@ import com.r0adkll.hackathon.api.model.ScheduleRequest;
 import com.r0adkll.hackathon.api.model.ScheduleResponse;
 import com.r0adkll.hackathon.api.model.SuccessResponse;
 import com.r0adkll.hackathon.data.model.Pet;
+import com.r0adkll.hackathon.data.model.Reservation;
+import com.r0adkll.hackathon.data.model.ReservationTime;
 import com.r0adkll.hackathon.data.model.Shelter;
 import com.r0adkll.hackathon.data.model.User;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import ollie.Ollie;
+import ollie.query.Select;
 import retrofit.http.Body;
 import retrofit.http.Field;
 import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * Project: Hackathon2015
@@ -32,6 +38,7 @@ public class OllieApiService implements ApiService {
         user.name = "Drew H.";
         user.phone = "(555) 555-5555";
         user.access_token = "12345123";
+        populateDatabase();
         return Observable.just(user).delay(200, TimeUnit.MILLISECONDS);
     }
 
@@ -42,23 +49,61 @@ public class OllieApiService implements ApiService {
         user.name = name;
         user.phone = phone;
         user.access_token = "12345123";
+        populateDatabase();
         return Observable.just(user)
                 .delay(150, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public Observable<FindPetsResponse> findPets(@Field("lat") double latitude, @Field("lon") double longitude) {
-        return null;
+        return Select.from(Pet.class)
+                .observable()
+                .map(pets -> {
+                    FindPetsResponse response = new FindPetsResponse();
+                    response.pets = pets;
+                    return response;
+                });
     }
 
     @Override
     public Observable<SuccessResponse> schedule(@Body ScheduleRequest request) {
-        return null;
+        return Select.from(User.class)
+                .observableSingle()
+                .flatMap(user -> {
+                    Ollie.getDatabase().beginTransaction();
+                    try {
+                        for (Reservation reservation : request.reservations) {
+                            reservation.user = user;
+                            reservation.save();
+
+                            // Save all it's time objects
+                            for (Integer time : reservation.times) {
+                                ReservationTime newTime = new ReservationTime();
+                                newTime.time = time;
+                                newTime.reservation = reservation;
+                                newTime.save();
+                            }
+                        }
+                        Ollie.getDatabase().setTransactionSuccessful();
+                    }finally {
+                        Ollie.getDatabase().endTransaction();
+                    }
+
+                    return Observable.just(new SuccessResponse());
+                });
+
     }
 
     @Override
     public Observable<ScheduleResponse> getMySchedule() {
-        return null;
+        return Select.from(User.class)
+                .observableSingle()
+                .flatMap(user -> user.getReservations())
+                .map(reservations -> {
+                    ScheduleResponse response = new ScheduleResponse();
+                    response.reservations = reservations;
+                    return response;
+                });
     }
 
     /***********************************************************************************************

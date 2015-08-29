@@ -27,6 +27,7 @@ import com.r0adkll.slidr.model.SlidrPosition;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ollie.Model;
 import pocketknife.BindExtra;
 import pocketknife.SaveState;
 
@@ -39,7 +40,7 @@ public class DetailActivity extends BaseActivity implements View.OnClickListener
 
     public static Intent createIntent(Context ctx, Pet pet) {
         Intent intent = new Intent(ctx, DetailActivity.class);
-        intent.putExtra(EXTRA_PET, pet);
+        intent.putExtra(EXTRA_PET, pet.id);
         return intent;
     }
 
@@ -68,13 +69,15 @@ public class DetailActivity extends BaseActivity implements View.OnClickListener
 
     @SaveState
     @BindExtra(EXTRA_PET)
+    Long mPetId;
+
     Pet mPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        ButterKnife.bind(this);
+        mPet = Model.find(Pet.class, mPetId);
 
         Slidr.attach(this, new SlidrConfig.Builder()
                 .position(SlidrPosition.LEFT)
