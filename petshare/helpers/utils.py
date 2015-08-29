@@ -2,8 +2,8 @@ from datetime import datetime
 from flask import request, json
 from flask.json import JSONEncoder
 from sqlalchemy.ext.declarative import DeclarativeMeta
-from .errors import APIException
-from .models import Base
+from ..errors import APIException
+from ..models import Base
 
 def validate_parameters(params):
     """Validate that parameters exist in the request JSON or raise an exception."""
