@@ -50,7 +50,6 @@ public class MockApiService implements ApiService{
             s1.description = "We love pets, and won't kill them. Pinky Promise!!!";
             s1.latitude = 0.222f;
             s1.longitude = 0.342341f;
-            s1.id = 0;
             add(s1);
 
             Shelter s2 = new Shelter();
@@ -59,7 +58,6 @@ public class MockApiService implements ApiService{
             s2.description = "We love pets, but if you don't adopt in time, they will be euthanized";
             s2.latitude = 0.123341234f;
             s2.longitude = 0.398098234f;
-            s2.id = 1;
             add(s2);
 
             Shelter s3 = new Shelter();
@@ -68,7 +66,6 @@ public class MockApiService implements ApiService{
             s3.description = "Send your pets here where they will live, play, and romp for eternity!!!";
             s3.latitude = 0.098765f;
             s3.longitude = 0.765432f;
-            s3.id = 2;
             add(s3);
         }
     };
@@ -77,32 +74,32 @@ public class MockApiService implements ApiService{
     static int getTimeSlot(int index){
         return 900 + ((index / 2) * 100) + ((index % 2) * 30);
     }
-
-    static final SimpleDateFormat RESERVATION_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    static List<Reservation> getMockReservation(){
-        Calendar now = Calendar.getInstance();
-        List<Reservation> rvs = new ArrayList<>();
-
-        for (int i = 0; i < 16; i++) {
-            Reservation rv = new Reservation();
-            rv.date = RESERVATION_FORMAT.format(now.getTime());
-
-            int count = Utils.getRandom().nextInt(8);
-            for (int j = 0; j < count; j++) {
-                int index = Utils.getRandom().nextInt(8);
-                int time = getTimeSlot(index);
-                if(!rv.times.contains(Integer.valueOf(time))){
-                    rv.times.add(time);
-                }
-            }
-
-            rv.pet = mockPet();
-            rvs.add(rv);
-            now.add(Calendar.DAY_OF_YEAR, 1);
-        }
-
-        return rvs;
-    }
+//
+//    static final SimpleDateFormat RESERVATION_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+//    static List<Reservation> getMockReservation(){
+//        Calendar now = Calendar.getInstance();
+//        List<Reservation> rvs = new ArrayList<>();
+//
+//        for (int i = 0; i < 16; i++) {
+//            Reservation rv = new Reservation();
+//            rv.date = RESERVATION_FORMAT.format(now.getTime());
+//
+//            int count = Utils.getRandom().nextInt(8);
+//            for (int j = 0; j < count; j++) {
+//                int index = Utils.getRandom().nextInt(8);
+//                int time = getTimeSlot(index);
+//                if(!rv.times.contains(Integer.valueOf(time))){
+//                    rv.times.add(time);
+//                }
+//            }
+//
+//            rv.pet = mockPet();
+//            rvs.add(rv);
+//            now.add(Calendar.DAY_OF_YEAR, 1);
+//        }
+//
+//        return rvs;
+//    }
 
     static Pet mockPet(){
         Pet pet = new Pet();
