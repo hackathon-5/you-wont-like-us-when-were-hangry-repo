@@ -37,7 +37,7 @@ class Base(db.Model):
     def __tablename__(cls):
         return cls.__name__.lower()
 
-    id = db.Column(db.Integer, primary_key=True, default=hash(time.time() + random.randrange(0, 99)))
+    id = db.Column(db.BigInteger, primary_key=True, default=hash(time.time() + random.randrange(0, 99)))
     created_at = db.Column(db.Integer, default=int(time.time()))
     updated_at = db.Column(db.Integer, default=int(time.time()), onupdate=int(time.time()))
 
