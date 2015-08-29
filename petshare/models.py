@@ -44,7 +44,7 @@ class Base(db.Model):
     def get_field_names(self):
         return [p.key for p in self.__mapper__.iterate_properties if p.key[0] != '_']
 
-    def to_dict(self):
+    def to_dict(self, exclude=None):
         return {f: getattr(self, f) for f in self.get_field_names()}
 
 
@@ -100,4 +100,4 @@ class User(Base):
 
 class AccessToken(Base):
     token = db.Column(db.String, default=hashlib.sha256(os.urandom(1024)).hexdigest())
-    user_id = db.Column(db.BigInteger, db.ForeignKey('user.id'))
+    _user_id = db.Column(db.BigInteger, db.ForeignKey('user.id'))
