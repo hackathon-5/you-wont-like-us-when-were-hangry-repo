@@ -22,7 +22,10 @@
         <activity android:name=".ui.screens.setup.LoginActivity" />
         <activity android:name=".ui.screens.setup.SignupActivity" />
         <activity android:name=".ui.screens.home.HomeActivity"
-            android:launchMode="singleTask"
+            android:launchMode="singleTask"/>
+
+        <activity android:name=".ui.screens.detail.DetailActivity"
+
             />
 
         <!-- Ollie Content Provider -->
