@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import request, json
 from flask.json import JSONEncoder
+from . import app, db
 
 from .errors import APIException
 
@@ -25,6 +26,10 @@ class CustomJSONEncoder(JSONEncoder):
     """JSON encoder to account for various simplifications"""
     def default(self, obj):
         try:
+            if isinstance(obj, db.Model):
+                temp = obj.to_dict()
+                return temp
+
             # UNIX timestamps from datetimes
             if isinstance(obj, datetime):
                 if obj.utcoffset() is not None:
