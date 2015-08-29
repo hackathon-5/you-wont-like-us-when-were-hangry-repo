@@ -158,24 +158,78 @@ public class OllieApiService implements ApiService {
         s2.save();
 
         Pet p21 = new Pet();
-        p21.name = "";
-        p21.description = "";
-        p21.type = "";
-        p21.age = 0f;
-        p21.avgScore = 0f;
-        p21.photoUrl = "";
+        p21.name = "Rose";
+        p21.description = "Hi there! As you cans see, I'm a beautiful black Labby girl and I'm so happy! I'm about 7-8 years young, and I love meeting new people - I've never met a stranger! I get along with everyone including the other dogs and kitties at my foster home - and I really love the little 2 legged types! I also love going for car rides - I'm always up for an adventure!";
+        p21.type = "dog";
+        p21.age = 7f;
+        p21.avgScore = 4.8f;
+        p21.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/32949670/1/?bust=1438961895&width=632&no_scale_up=1";
         p21.shelter = s2;
         p21.save();
 
         Pet p22 = new Pet();
-        p21.name = "";
-        p21.description = "";
-        p21.type = "";
-        p21.age = 0f;
-        p21.avgScore = 0f;
-        p21.photoUrl = "";
-        p21.shelter = s2;
-        p21.save();
+        p22.name = "Jonah";
+        p22.description = "Hi! I'm Jonah and as you can see, I'm a handsome yellow Lab! I've got a very thick longer coat, so I might have a little husky or shepherd in my bloodline, too! I'm about 10 years young and I love to run outside - I'll do best in a house with another easy going dog for company";
+        p22.type = "dog";
+        p22.age = 10f;
+        p22.avgScore = 4.9f;
+        p22.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/32058198/1/?bust=1430575299&width=632&no_scale_up=1";
+        p22.shelter = s2;
+        p22.save();
+
+        Pet p23 = new Pet();
+        p23.name = "Artie";
+        p23.description = "Artie is great with dogs, cats, kids, everyone! He's great on walks (up to 1/2 mile at a time). Artie also likes to sit by your side and relax. Apply for Artie today!";
+        p23.type = "dog";
+        p23.age = 5.5f;
+        p23.avgScore = 5f;
+        p23.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/32858722/1/?bust=1438116232&width=632&no_scale_up=1";
+        p23.shelter = s2;
+        p23.save();
+
+        Pet p24 = new Pet();
+        p24.name = "Toby";
+        p24.description = "Meet Toby. Toby is a 9 month old. This guy is great with dogs, but no cats please. Toby is a young and exuberant fellow and would likely be better in a home with older kids. Toby has a love of life and is learning to understand his size and improve his manners. More updates on his training coming soon.";
+        p24.type = "dog";
+        p24.age = 1f;
+        p24.avgScore = 4.2f;
+        p24.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/32406554/1/?bust=1433975398&width=632&no_scale_up=1";
+        p24.shelter = s2;
+        p24.save();
+
+        Pet p25 = new Pet();
+        p25.name = "Jeb";
+        p25.description = "Meet Jeb. Jeb is 8 years old and working to lose a little weight. He is about 90 pounds. This fellow is good with dogs and cats and older kids. While he loves them all he is looking for a relatively quiet life. Jeb is well mannered. Although he has not been crated he is house trained, good on leash and knows basic commands.";
+        p25.type = "dog";
+        p25.age = 8f;
+        p25.avgScore = 4.9f;
+        p25.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/31279172/2/?bust=1421795663&width=632&no_scale_up=1";
+        p25.shelter = s2;
+        p25.save();
+
+        Pet p26 = new Pet();
+        p26.name = "Lilly";
+        p26.description = "Meet Lilly. Lilly is about 4 years old and around 80 pounds. This girl is VERY shy. Lilly is well mannered but a quiet, shy girl learning to trust again. She is house, crate and leash trained. In fact she loves to go on walks. She knows some basic commands. Lilly's coat seems to be darkening as she gets fitter.";
+        p26.type = "dog";
+        p26.age = 4f;
+        p26.avgScore = 4.8f;
+        p26.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/31204757/2/?bust=1420810298&width=632&no_scale_up=1";
+        p26.shelter = s2;
+        p26.save();
+
+        Pet p27 = new Pet();
+        p27.name = "Mattie";
+        p27.description = "Meet Mattie. Mattie is an energetic 8 year old. This girl is great with other dogs and kids, but her view on cats is not yet known. She is house trained and does not need a crate. Mattie is working to improve her leash and basic command skills. Mattie leaps with joy when she sees the leash and loves taking long walks.";
+        p27.type = "dog";
+        p27.age = 8f;
+        p27.avgScore = 3.6f;
+        p27.photoUrl = "https://drpem3xzef3kf.cloudfront.net/photos/pets/31928729/3/?bust=1429137574&width=632&no_scale_up=1";
+        p27.shelter = s2;
+        p27.save();
+
+        /**********************************************************
+         *
+         */
 
         Shelter s3 = new Shelter();
         s3.name = "";
