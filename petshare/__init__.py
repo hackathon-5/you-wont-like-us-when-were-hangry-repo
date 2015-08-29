@@ -18,7 +18,7 @@ class RequestContextualFilter(logging.Filter):
             log_record.user_id = getattr(g, 'user', None)
             return True
 
-log_format = "%(levelname)s\t[%(asctime)s]\t%(user.id)s\t[%(module)s:%(funcName)s:%(lineno)d]: %(message)s"
+log_format = "%(levelname)s\t[%(asctime)s]\t[%(module)s:%(funcName)s:%(lineno)d]: %(message)s"
 formatter = logging.Formatter(log_format)
 handler = logging.StreamHandler(sys.stdout)
 handler.setFormatter(formatter)
