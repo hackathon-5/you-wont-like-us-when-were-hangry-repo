@@ -32,7 +32,7 @@ def login():
 
     g.user = user
 
-    rv = jsonify(user=user)
+    rv = jsonify(user=user.to_dict())
     rv.status_code = 200
     return rv
 
@@ -63,6 +63,6 @@ def sign_up():
 
     g.user = new_user
 
-    rv = jsonify(user=new_user)
+    rv = jsonify(user=new_user.to_dict())
     rv.status_code = 200
     return rv
