@@ -27,20 +27,10 @@ class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
         print(obj.__class__.__name__)
         try:
-            # Serialize AttrDict (from ES, etc.)
             if isinstance(obj, db.Model):
                 temp = obj.to_dict(exclude=getattr(obj, 'json_hidden'))
                 return temp
 
-            # UNIX timestamps from datetimes
-            if isinstance(obj, datetime):
-                if obj.utcoffset() is not None:
-                    obj = obj - obj.utcoffset()
-
-                seconds = int(calendar.timegm(obj.timetuple()))
-                return seconds
-
-            iterable = iter(obj)
         except TypeError:
             pass
         else:
