@@ -46,7 +46,12 @@ class Base(db.Model):
 
 
     def to_dict(self, exclude):
-        return {f: getattr(self, f) for f in self.get_field_names(exclude)}
+        rv = {f: getattr(self, f) for f in self.get_field_names()}
+        for k in exclude:
+            if hasattr(rv, k):
+                delattr(rv, k)
+
+        return rv
 
 
 class Pet(Base):
