@@ -34,4 +34,10 @@ class CustomJSONEncoder(JSONEncoder):
         else:
             return list(iterable)
 
-        return JSONEncoder.default(self, obj)
+        try:
+            rv = JSONEncoder.default(self, obj)
+        except:
+            print(obj)
+            raise
+
+        return rv
