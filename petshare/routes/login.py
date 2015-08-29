@@ -31,7 +31,7 @@ def login():
 
     g.user = user
 
-    rv = jsonify(user)
+    rv = jsonify(user=user)
     rv.status_code = 200
     return rv
 
@@ -44,22 +44,20 @@ def sign_up():
     if existing_user:
         raise APIException('User already exists', status_code=409)
 
-    new_token = AccessToken()
-    db.session.add(new_token)
-    db.session.flush()
-
     new_user = User(name=request.json.get('name'),
                     email=request.json.get('email').lower(),
                     phone=request.json.get('phone'),
-                    password=request.json.get('password'),
-                    access_token=[new_token])
+                    password=request.json.get('password'))
 
     db.session.add(new_user)
     db.session.flush()
 
-    new_token.user_id = new_user.id
-
+    new_token = AccessToken(user_id=user.id)
     db.session.add(new_token)
+    db.session.flush()
+
+    new_user.access_token = [token]
+
     db.session.commit()
 
     g.user = new_user
