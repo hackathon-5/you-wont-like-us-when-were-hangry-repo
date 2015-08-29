@@ -26,9 +26,9 @@ for code in default_exceptions.keys():
 # app.after_request(whatever)
 
 # Register Blueprints
-from .routes.login import login_bp
+from . import routes
 
-app.register_blueprint(login_bp)
+app.register_blueprint(routes.login.login_bp)
 
 # Health check EP
 @app.route('/')
