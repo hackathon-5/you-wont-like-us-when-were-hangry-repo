@@ -47,8 +47,6 @@ def handle_invalid_usage(error):
 # app.before_request(whatever)
 # app.after_request(whatever)
 
-app.json_encoder = CustomJSONEncoder
-
 # Register Blueprints
 from .routes.login import login_bp
 from .routes.evil import evil_bp
