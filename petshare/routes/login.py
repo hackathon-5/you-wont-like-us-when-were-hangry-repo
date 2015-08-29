@@ -56,7 +56,7 @@ def sign_up():
     db.session.add(new_token)
     db.session.flush()
 
-    new_user.access_token = [token]
+    new_user.access_token = [new_token]
 
     db.session.commit()
 
