@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,6 +13,9 @@
 
         android:background="?attr/colorPrimary"
         android:elevation="@dimen/appbar_elevation"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+
         />
 
 
@@ -89,6 +93,41 @@
             android:layout_marginLeft="@dimen/activity_padding"
             android:layout_marginRight="@dimen/activity_padding"
 
+            android:src="@drawable/ic_call_24dp"
+            android:alpha=".54"
+            />
+
+        <EditText
+            android:id="@+id/input_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"
+
+            android:hint="Phone number"
+            android:textSize="16sp"
+            android:textColorHint="@color/black26"
+            android:textColor="@color/black87"
+
+            android:singleLine="true"
+            android:inputType="numberSigned"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:gravity="center_vertical|start"
+        android:layout_marginTop="@dimen/half_padding">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"
+
             android:src="@drawable/ic_drafts_24dp"
             android:alpha=".54"
             />
@@ -124,26 +163,48 @@
             android:layout_marginLeft="@dimen/activity_padding"
             android:layout_marginRight="@dimen/activity_padding"
 
-            android:src="@drawable/ic_call_24dp"
+            android:src="@drawable/ic_vpn_key_24dp"
             android:alpha=".54"
             />
 
         <EditText
-            android:id="@+id/input_phone"
+            android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_padding"
             android:layout_marginRight="@dimen/activity_padding"
 
-            android:hint="Phone number"
+            android:hint="Password"
             android:textSize="16sp"
             android:textColorHint="@color/black26"
             android:textColor="@color/black87"
 
             android:singleLine="true"
-            android:inputType="numberSigned"
+            android:inputType="text|textPassword"
             />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/activity_padding"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+
+        android:text="Sign up"
+        android:textColor="@color/white"
+        android:backgroundTint="?attr/colorAccent"
+        />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        />
 
 </LinearLayout>

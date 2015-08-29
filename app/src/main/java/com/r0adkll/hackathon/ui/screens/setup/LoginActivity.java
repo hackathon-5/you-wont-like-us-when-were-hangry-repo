@@ -102,6 +102,8 @@ public class LoginActivity extends BaseActivity {
     void onSignUpClicked(){
 
         // Show the signup flow
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
 
 
     }
