@@ -52,7 +52,7 @@ def sign_up():
     db.session.add(new_user)
     db.session.flush()
 
-    new_token = AccessToken(user_id=user.id)
+    new_token = AccessToken(user_id=new_user.id)
     db.session.add(new_token)
     db.session.flush()
 
