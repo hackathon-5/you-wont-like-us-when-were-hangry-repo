@@ -26,7 +26,7 @@ for code in default_exceptions.keys():
 # app.after_request(whatever)
 
 # Register Blueprints
-from routes import login_bp
+from .routes import login_bp
 
 app.register_blueprint(login_bp)
 
