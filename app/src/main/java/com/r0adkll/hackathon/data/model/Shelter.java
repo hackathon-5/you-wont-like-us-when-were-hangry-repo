@@ -6,34 +6,27 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 /**
  * Project: Hackathon2015
  * Package: com.r0adkll.hackathon.data.model
- * Created by drew.heavner on 8/28/15.
+ * Created by drew.heavner on 8/29/15.
  */
 @JsonObject
-public class Pet {
+public class Shelter {
 
-    public static final String TYPE_DOG = "dog";
-    public static final String TYPE_CAT = "cat";
+    @JsonField
+    public int id;
 
     @JsonField
     public String name;
-
-    // 'dog' or 'cat'
-    @JsonField
-    public String type;
-
-    @JsonField
-    public String photoUrl;
 
     @JsonField
     public String description;
 
     @JsonField
-    public float age;
+    public String address;
 
     @JsonField
-    public float avgScore;
+    public float latitude;
 
     @JsonField
-    public Shelter shelter;
+    public float longitude;
 
 }

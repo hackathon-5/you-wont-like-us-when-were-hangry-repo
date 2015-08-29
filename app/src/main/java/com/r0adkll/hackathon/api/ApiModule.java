@@ -58,10 +58,6 @@ public class ApiModule {
                 .build();
     }
 
-    @Provides @Singleton
-    ApiService provideApiService(RestAdapter adapter){
-        return adapter.create(ApiService.class);
-    }
 
 
 }

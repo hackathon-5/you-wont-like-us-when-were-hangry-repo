@@ -1,6 +1,7 @@
 package com.r0adkll.hackathon.api;
 
 
+import com.r0adkll.hackathon.api.model.FindPetsResponse;
 import com.r0adkll.hackathon.data.model.User;
 
 import retrofit.http.Body;
@@ -34,5 +35,10 @@ public interface ApiService {
                             @Field("password") String pswd,
                             @Field("name") String name,
                             @Field("phone") String phone);
+
+    @FormUrlEncoded
+    @POST("/findPets")
+    Observable<FindPetsResponse> findPets(@Field("lat") double latitude,
+                                          @Field("lon") double longitude);
 
 }

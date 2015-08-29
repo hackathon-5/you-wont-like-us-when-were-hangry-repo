@@ -66,6 +66,7 @@ public class App extends Application{
                 .dataModule(new DataModule())
                 .uiModule(new UiModule())
                 .apiModule(new ApiModule())
+                .infoModule(new InfoModule())
                 .build();
         mComponent.inject(this);
     }
