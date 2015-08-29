@@ -42,12 +42,12 @@ class Base(db.Model):
     updated_at = db.Column(db.BigInteger, default=int(time.time()), onupdate=int(time.time()))
 
     def get_field_names(self, exclude):
-        if exclude:
+        if exclude != None:
             return [p.key for p in self.__mapper__.iterate_properties if p.key not in exclude and p.key[0] != '_']
         return [p.key for p in self.__mapper__.iterate_properties if p.key and p.key[0] != '_']
 
 
-    def to_dict(self, exclude=None):
+    def to_dict(self, exclude):
         return {f: getattr(self, f) for f in self.get_field_names(exclude)}
 
 
@@ -82,7 +82,7 @@ class Reservations(Base):
 
 class User(Base):
     json_hidden = None
-    
+
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
     phone = db.Column(db.String, nullable=False)
