@@ -17,3 +17,29 @@ def validate_parameters(params):
         raise APIException(error_message, errors=full_errors)
     else:
         return
+
+        
+class CustomJSONEncoder(JSONEncoder):
+    """JSON encoder to account for various simplifications"""
+    def default(self, obj):
+        try:
+            # Serialize AttrDict (from ES, etc.)
+            if isinstance(obj, AttrDict):
+                temp = obj.to_dict()
+                return temp
+
+            # UNIX timestamps from datetimes
+            if isinstance(obj, datetime):
+                if obj.utcoffset() is not None:
+                    obj = obj - obj.utcoffset()
+
+                seconds = int(calendar.timegm(obj.timetuple()))
+                return seconds
+
+            iterable = iter(obj)
+        except TypeError:
+            pass
+        else:
+            return list(iterable)
+
+        return JSONEncoder.default(self, obj)
