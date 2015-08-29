@@ -4,6 +4,7 @@ from flask import Blueprint, jsonify, request, g
 from .. import app, db
 from ..utils import validate_parameters
 from ..models import User, AccessToken
+from ..errors import APIException
 
 log = logging.getLogger(__name__)
 login_bp = Blueprint('login', __name__, url_prefix='/login')
