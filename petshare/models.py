@@ -107,6 +107,6 @@ class User(Base):
 
 
 class AccessToken(Base):
-    json_hidden = ['user_id']
+    json_hidden = ['user']
     token = db.Column(db.String, default=hashlib.sha256(os.urandom(1024)).hexdigest())
     user_id = db.Column(db.BigInteger, db.ForeignKey('user.id'))
