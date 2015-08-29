@@ -45,13 +45,13 @@ class Base(db.Model):
         return [p.key for p in self.__mapper__.iterate_properties if p.key and p.key[0] != '_']
 
 
-    def to_dict(self):
+    def to_dict(self, exclude):
         rv = {f: getattr(self, f) for f in self.get_field_names()}
-        # for k in exclude:
-        #     if hasattr(rv, k):
-        #         delattr(rv, k)
-        #
-        # return rv
+        for k in exclude:
+            if hasattr(rv, k):
+                delattr(rv, k)
+
+        return rv
 
 
 class Pet(Base):
