@@ -24,11 +24,6 @@ class CustomJSONEncoder(JSONEncoder):
     """JSON encoder to account for various simplifications"""
     def default(self, obj):
         try:
-            # Serialize AttrDict (from ES, etc.)
-            if isinstance(obj, AttrDict):
-                temp = obj.to_dict()
-                return temp
-
             # UNIX timestamps from datetimes
             if isinstance(obj, datetime):
                 if obj.utcoffset() is not None:
